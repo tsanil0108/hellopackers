@@ -1,0 +1,740 @@
+/* =========================================================
+   HELLO PACKERS
+   QUOTE POPUP
+========================================================= */
+
+.quote-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(4, 12, 32, 0.78);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  animation:
+    quotePopupFadeIn
+    0.25s
+    ease
+    forwards;
+}
+
+
+.quote-popup-open {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.quote-popup__card {
+  position: relative;
+
+  width: min(720px, 100%);
+
+  max-height: calc(100vh - 48px);
+
+  overflow-y: auto;
+
+  background: var(--paper-raised);
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+
+  border-radius: 24px;
+
+  padding: 34px;
+
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.4),
+    0 12px 30px rgba(7, 18, 48, 0.2);
+
+  animation:
+    quotePopupSlideUp
+    0.35s
+    var(--ease)
+    forwards;
+}
+
+
+.quote-popup__card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.quote-popup__card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.quote-popup__card::-webkit-scrollbar-thumb {
+  background: #cbd5e5;
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.quote-popup__close {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid var(--line-light);
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  color: var(--ink-900);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+
+.quote-popup__close span {
+  font-family: Arial, sans-serif;
+
+  font-size: 27px;
+
+  font-weight: 300;
+
+  line-height: 1;
+}
+
+
+.quote-popup__close:hover {
+  background: var(--ink-900);
+
+  color: #fff;
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.quote-popup__header {
+  padding-right: 52px;
+
+  margin-bottom: 22px;
+}
+
+
+.quote-popup__eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 9px;
+
+  color: var(--cyan-500);
+
+  font-family: var(--font-head);
+
+  font-size: 0.76rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+}
+
+
+.quote-popup__eyebrow::before {
+  content: '';
+
+  width: 24px;
+
+  height: 2px;
+
+  background: var(--cyan-500);
+
+  border-radius: 10px;
+}
+
+
+.quote-popup__header h2,
+.quote-popup__success h2 {
+  color: var(--ink-900);
+
+  font-size: clamp(1.8rem, 4vw, 2.35rem);
+
+  margin-bottom: 10px;
+
+  letter-spacing: -0.025em;
+}
+
+
+.quote-popup__header p {
+  color: var(--text-muted);
+
+  font-size: 0.94rem;
+
+  line-height: 1.65;
+
+  max-width: 56ch;
+}
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.quote-popup__benefits {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  padding: 13px 15px;
+
+  margin-bottom: 24px;
+
+  background: var(--cyan-050);
+
+  border: 1px solid rgba(41, 197, 246, 0.16);
+
+  border-radius: 12px;
+}
+
+
+.quote-popup__benefits span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--ink-850);
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+}
+
+
+.quote-popup__benefits svg {
+  width: 16px;
+
+  height: 16px;
+
+  color: var(--cyan-500);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.quote-popup__form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+
+.quote-popup__row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+
+.quote-popup__field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.quote-popup__field label {
+  color: var(--ink-850);
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+}
+
+
+.quote-popup__field label span {
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+
+  font-weight: 400;
+
+  margin-left: 5px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.quote-popup__field input,
+.quote-popup__field select,
+.quote-popup__field textarea {
+  width: 100%;
+
+  border: 1px solid #d8e0ec;
+
+  border-radius: 9px;
+
+  background: #fbfcfe;
+
+  color: var(--ink-900);
+
+  padding: 12px 13px;
+
+  font-family: var(--font-body);
+
+  font-size: 0.88rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s var(--ease),
+    background 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+
+.quote-popup__field input,
+.quote-popup__field select {
+  height: 46px;
+}
+
+
+.quote-popup__field textarea {
+  min-height: 82px;
+
+  resize: vertical;
+
+  line-height: 1.5;
+}
+
+
+.quote-popup__field input::placeholder,
+.quote-popup__field textarea::placeholder {
+  color: #98a5ba;
+}
+
+
+.quote-popup__field input:hover,
+.quote-popup__field select:hover,
+.quote-popup__field textarea:hover {
+  border-color: #b8c7db;
+}
+
+
+.quote-popup__field input:focus,
+.quote-popup__field select:focus,
+.quote-popup__field textarea:focus {
+  outline: none;
+
+  border-color: var(--cyan-500);
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 3px rgba(41, 197, 246, 0.12);
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.quote-popup__submit {
+  width: 100%;
+
+  min-height: 52px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: var(--amber-500);
+
+  color: var(--ink-900);
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  font-family: var(--font-head);
+
+  font-size: 0.96rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+
+.quote-popup__submit svg {
+  width: 18px;
+
+  height: 18px;
+
+  transition:
+    transform 0.2s var(--ease);
+}
+
+
+.quote-popup__submit:hover {
+  background: var(--amber-600);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 26px -10px
+    rgba(245, 165, 36, 0.7);
+}
+
+
+.quote-popup__submit:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   PRIVACY
+========================================================= */
+
+.quote-popup__privacy {
+  text-align: center;
+
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+
+  line-height: 1.5;
+
+  margin: -4px 0 0;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.quote-popup__success {
+  min-height: 430px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 35px 25px 25px;
+}
+
+
+.quote-popup__success-icon {
+  width: 72px;
+
+  height: 72px;
+
+  margin-bottom: 22px;
+
+  border-radius: 50%;
+
+  background: var(--cyan-050);
+
+  border: 1px solid rgba(41, 197, 246, 0.2);
+
+  color: var(--cyan-500);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  animation:
+    quoteSuccessPop
+    0.45s
+    var(--ease);
+}
+
+
+.quote-popup__success-icon svg {
+  width: 34px;
+
+  height: 34px;
+}
+
+
+.quote-popup__success p {
+  max-width: 430px;
+
+  color: var(--text-muted);
+
+  line-height: 1.65;
+
+  font-size: 0.92rem;
+
+  margin-bottom: 26px;
+}
+
+
+.quote-popup__success-btn {
+  min-width: 130px;
+
+  min-height: 46px;
+
+  padding: 0 20px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: var(--ink-900);
+
+  color: #fff;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+
+.quote-popup__success-btn svg {
+  width: 17px;
+
+  height: 17px;
+}
+
+
+.quote-popup__success-btn:hover {
+  background: var(--ink-800);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes quotePopupFadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes quotePopupSlideUp {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+@keyframes quoteSuccessPop {
+
+  0% {
+    opacity: 0;
+
+    transform: scale(0.6);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 680px) {
+
+  .quote-popup {
+    padding: 14px;
+  }
+
+  .quote-popup__card {
+    max-height:
+      calc(100vh - 28px);
+
+    padding:
+      26px 20px 22px;
+
+    border-radius: 19px;
+  }
+
+  .quote-popup__header {
+    padding-right: 42px;
+  }
+
+  .quote-popup__row {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .quote-popup__benefits {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .quote-popup__success {
+    min-height: 380px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 460px) {
+
+  .quote-popup {
+    padding: 8px;
+  }
+
+  .quote-popup__card {
+    max-height:
+      calc(100vh - 16px);
+
+    padding:
+      23px 16px 18px;
+
+    border-radius: 17px;
+  }
+
+  .quote-popup__close {
+    top: 13px;
+
+    right: 13px;
+
+    width: 36px;
+
+    height: 36px;
+  }
+
+  .quote-popup__header {
+    padding-right: 40px;
+  }
+
+  .quote-popup__header h2 {
+    font-size: 1.55rem;
+  }
+
+  .quote-popup__header p {
+    font-size: 0.84rem;
+  }
+
+  .quote-popup__benefits {
+    padding: 11px 12px;
+
+    margin-bottom: 19px;
+  }
+
+  .quote-popup__form {
+    gap: 14px;
+  }
+
+  .quote-popup__field input,
+  .quote-popup__field select {
+    height: 44px;
+  }
+
+  .quote-popup__submit {
+    min-height: 49px;
+  }
+
+}
