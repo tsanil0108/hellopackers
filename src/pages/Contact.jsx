@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Reveal from '../components/Reveal';
 import PageHero from '../components/PageHero';
@@ -13,15 +14,13 @@ import {
   IconShield,
   IconHeadset,
   IconRupee,
-  IconArrowRight
+  IconArrowRight,
 } from '../components/Icons';
 
 import photos from '../assets/photos';
-
 import { CONTACT } from '../siteData';
 
 import './Contact.css';
-
 
 const INITIAL_FORM = {
   name: '',
@@ -31,55 +30,49 @@ const INITIAL_FORM = {
   to: '',
   service: '',
   date: '',
-  notes: ''
+  notes: '',
 };
-
 
 const WHY_US = [
   {
     icon: <IconUsers />,
     title: 'Personalized Solutions',
-    text: 'Tailored to your needs'
+    text: 'Tailored to your needs',
   },
   {
     icon: <IconRupee />,
     title: 'Transparent Pricing',
-    text: 'No hidden charges'
+    text: 'No hidden charges',
   },
   {
     icon: <IconHeadset />,
     title: 'Expert Guidance',
-    text: 'From start to finish'
+    text: 'From start to finish',
   },
   {
     icon: <IconShield />,
     title: 'Dedicated Support',
-    text: 'Always here for you'
-  }
+    text: 'Always here for you',
+  },
 ];
 
-
 export default function Contact() {
-
   const [form, setForm] = useState(INITIAL_FORM);
-
   const [sent, setSent] = useState(false);
-
   const [quoteOpen, setQuoteOpen] = useState(false);
 
-
   const update = (field) => (event) => {
-
     setForm((current) => ({
       ...current,
-      [field]: event.target.value
+      [field]: event.target.value,
     }));
 
+    if (sent) {
+      setSent(false);
+    }
   };
 
-
   const handleSubmit = (event) => {
-
     event.preventDefault();
 
     const subject = encodeURIComponent(
@@ -88,32 +81,31 @@ export default function Contact() {
 
     const body = encodeURIComponent(
       `HELLO PACKERS — QUOTE REQUEST\n\n` +
-      `Name: ${form.name}\n` +
-      `Phone: ${form.phone}\n` +
-      `Email: ${form.email}\n` +
-      `Moving From: ${form.from}\n` +
-      `Moving To: ${form.to}\n` +
-      `Service Required: ${form.service}\n` +
-      `Preferred Date: ${form.date}\n\n` +
-      `Additional Details:\n${form.notes || 'N/A'}\n\n` +
-      `Sent from Hello Packers website.`
+        `Name: ${form.name}\n` +
+        `Phone: ${form.phone}\n` +
+        `Email: ${form.email}\n` +
+        `Moving From: ${form.from}\n` +
+        `Moving To: ${form.to}\n` +
+        `Service Required: ${form.service}\n` +
+        `Preferred Date: ${form.date}\n\n` +
+        `Additional Details:\n${form.notes || 'N/A'}\n\n` +
+        `Sent from Hello Packers website.`
     );
 
     window.location.href =
       `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
 
     setSent(true);
-
   };
 
-
   return (
-    <>
+    <div className="contact-page">
       {/* =====================================================
           PAGE HERO
       ====================================================== */}
 
       <PageHero
+        crumb="Contact"
         eyebrow="Get In Touch"
         titleWhite="We're Here to Make Your"
         titleCyan="Move Easier"
@@ -121,20 +113,20 @@ export default function Contact() {
         trustItems={[
           {
             icon: <IconPhone />,
-            label: 'Quick Response'
+            label: 'Quick Response',
           },
           {
             icon: <IconShield />,
-            label: 'Reliable Support'
+            label: 'Reliable Support',
           },
           {
             icon: <IconUsers />,
-            label: 'Friendly Team'
+            label: 'Friendly Team',
           },
           {
             icon: <IconHeadset />,
-            label: '24/7 Assistance'
-          }
+            label: '24/7 Assistance',
+          },
         ]}
         image={photos.courierBoxFront}
         imageAlt="Hello Packers support team"
@@ -145,18 +137,19 @@ export default function Contact() {
             Our Priority
           </>
         }
+        primaryCta={
+          <Link to="/contact" className="btn btn-primary">
+            Get a Quote
+          </Link>
+        }
       />
-
 
       {/* =====================================================
           CONTACT SECTION
       ====================================================== */}
 
-      <section className="section">
-
+      <section className="section contact-section">
         <div className="container contact-layout">
-
-
           {/* =================================================
               CONTACT FORM
           ================================================= */}
@@ -166,30 +159,22 @@ export default function Contact() {
             className="contact-form"
             onSubmit={handleSubmit}
           >
-
-            <span className="eyebrow">
-              Send Us a Message
-            </span>
+            <span className="eyebrow">Send Us a Message</span>
 
             <h2>
-              Request a Free Quote
+              Request a Free <span className="text-cyan-dark">Quote</span>
             </h2>
 
             <p className="contact-form__intro">
-              Fill in the details below and our team will
-              get back to you shortly with the best solution
-              for your move.
+              Fill in the details below and our team will get back to you
+              shortly with the best solution for your move.
             </p>
-
 
             {/* NAME + PHONE */}
 
             <div className="contact-form__row">
-
               <label>
-                <span>
-                  Full Name *
-                </span>
+                <span>Full Name *</span>
 
                 <input
                   type="text"
@@ -201,11 +186,8 @@ export default function Contact() {
                 />
               </label>
 
-
               <label>
-                <span>
-                  Phone Number *
-                </span>
+                <span>Phone Number *</span>
 
                 <input
                   type="tel"
@@ -219,45 +201,34 @@ export default function Contact() {
                   maxLength="10"
                 />
               </label>
-
             </div>
-
 
             {/* EMAIL */}
 
             <label>
-              <span>
-                Email Address *
-              </span>
+              <span>Email Address *</span>
 
               <input
                 type="email"
                 required
                 value={form.email}
                 onChange={update('email')}
-                placeholder="you@example.com"
+                placeholder="Enter your email address"
                 autoComplete="email"
               />
             </label>
 
-
             {/* SERVICE */}
 
             <label>
-              <span>
-                Service Required *
-              </span>
+              <span>Service Required *</span>
 
               <select
                 required
                 value={form.service}
                 onChange={update('service')}
               >
-
-                <option
-                  value=""
-                  disabled
-                >
+                <option value="" disabled>
                   Select a service
                 </option>
 
@@ -281,22 +252,15 @@ export default function Contact() {
                   Storage &amp; Warehousing
                 </option>
 
-                <option value="Other">
-                  Other
-                </option>
-
+                <option value="Other">Other</option>
               </select>
             </label>
-
 
             {/* FROM + TO */}
 
             <div className="contact-form__row">
-
               <label>
-                <span>
-                  Moving From *
-                </span>
+                <span>Moving From *</span>
 
                 <input
                   type="text"
@@ -307,11 +271,8 @@ export default function Contact() {
                 />
               </label>
 
-
               <label>
-                <span>
-                  Moving To *
-                </span>
+                <span>Moving To *</span>
 
                 <input
                   type="text"
@@ -321,16 +282,12 @@ export default function Contact() {
                   placeholder="New address / area"
                 />
               </label>
-
             </div>
-
 
             {/* DATE */}
 
             <label>
-              <span>
-                Moving Date *
-              </span>
+              <span>Moving Date *</span>
 
               <input
                 type="date"
@@ -340,15 +297,12 @@ export default function Contact() {
               />
             </label>
 
-
             {/* NOTES */}
 
             <label>
               <span>
                 Additional Message
-                <small>
-                  {' '}Optional
-                </small>
+                <small> Optional</small>
               </span>
 
               <textarea
@@ -358,7 +312,6 @@ export default function Contact() {
                 placeholder="Home size, vehicle to move, storage needs, floor and lift access..."
               />
             </label>
-
 
             {/* SUBMIT */}
 
@@ -370,17 +323,13 @@ export default function Contact() {
               <IconArrowRight />
             </button>
 
-
             {sent && (
               <p className="contact-form__sent">
-                Your email app should now open with the
-                details filled in. Please press Send to
-                complete your enquiry.
+                Your email app should now open with the details filled in.
+                Please press Send to complete your enquiry.
               </p>
             )}
-
           </Reveal>
-
 
           {/* =================================================
               RIGHT SIDE
@@ -389,288 +338,193 @@ export default function Contact() {
           <Reveal
             className="contact-side"
             style={{
-              transitionDelay: '0.1s'
+              transitionDelay: '0.1s',
             }}
           >
+            {/* CONTACT INFORMATION */}
 
             <div className="contact-info-card">
+              <div className="contact-info-card__header">
+                <span className="eyebrow">Contact Information</span>
 
-              <span className="eyebrow eyebrow--light">
-                Contact Information
-              </span>
+                <h3>
+                  Let's Talk About Your{' '}
+                  <span className="text-cyan-dark">Move</span>
+                </h3>
 
+                <p>
+                  Our team is ready to answer your questions and help plan
+                  your relocation.
+                </p>
+              </div>
 
               <ul>
-
                 <li>
-
-                  <span className="icon-badge">
+                  <span className="contact-info-icon">
                     <IconPhone />
                   </span>
 
                   <div>
-                    <h4>
-                      Call Us
-                    </h4>
+                    <h4>Call Us</h4>
 
-                    <a
-                      href={`tel:${CONTACT.phone}`}
-                    >
+                    <a href={`tel:${CONTACT.phone}`}>
                       {CONTACT.phoneDisplay}
                     </a>
                   </div>
-
                 </li>
 
-
                 <li>
-
-                  <span className="icon-badge">
+                  <span className="contact-info-icon">
                     <IconMail />
                   </span>
 
                   <div>
-                    <h4>
-                      Email Us
-                    </h4>
+                    <h4>Email Us</h4>
 
-                    <a
-                      href={`mailto:${CONTACT.email}`}
-                    >
+                    <a href={`mailto:${CONTACT.email}`}>
                       {CONTACT.email}
                     </a>
                   </div>
-
                 </li>
 
-
                 <li>
-
-                  <span className="icon-badge">
+                  <span className="contact-info-icon">
                     <IconPin />
                   </span>
 
                   <div>
-                    <h4>
-                      Visit Us
-                    </h4>
+                    <h4>Visit Us</h4>
 
                     <span>
-                      Mumbai, Maharashtra
+                      Kandivali East, Mumbai
                     </span>
                   </div>
-
                 </li>
 
-
                 <li>
-
-                  <span className="icon-badge">
+                  <span className="contact-info-icon">
                     <IconClock />
                   </span>
 
                   <div>
-                    <h4>
-                      Working Hours
-                    </h4>
+                    <h4>Working Hours</h4>
 
                     <span>
                       Mon – Sun | 24/7 Support
                     </span>
                   </div>
-
                 </li>
-
               </ul>
 
+              <div className="contact-info-card__bottom">
+                <span>Need an instant quote?</span>
 
-              <img
-                src={photos.courierDoor}
-                alt="Hello Packers office"
-                className="contact-info-card__photo"
-              />
-
-            </div>
-
-
-            {/* MAP */}
-
-            <div className="map-card">
-
-              <span className="eyebrow">
-                Our Location
-              </span>
-
-              <div className="map-card__box">
-
-                <svg
-                  viewBox="0 0 400 220"
-                  className="map-card__svg"
-                  preserveAspectRatio="none"
+                <Link
+                  to="/contact"
+                  className="contact-info-card__link"
                 >
-
-                  <rect
-                    width="400"
-                    height="220"
-                    fill="#0f2451"
-                  />
-
-                  <path
-                    d="M0 40 H400 M0 90 H400 M0 140 H400 M0 190 H400"
-                    stroke="rgba(255,255,255,0.08)"
-                    strokeWidth="1"
-                  />
-
-                  <path
-                    d="M40 0 V220 M120 0 V220 M200 0 V220 M280 0 V220 M360 0 V220"
-                    stroke="rgba(255,255,255,0.08)"
-                    strokeWidth="1"
-                  />
-
-                  <path
-                    d="M0 60 C 120 20, 200 160, 400 100"
-                    stroke="var(--cyan-500)"
-                    strokeWidth="2"
-                    fill="none"
-                    opacity="0.5"
-                  />
-
-                </svg>
-
-
-                <span className="map-card__pin">
-                  <IconPin />
-                </span>
-
-
-                <span className="map-card__label">
-                  Mumbai
-                </span>
-
-              </div>
-
-
-              <div className="map-card__footer">
-
-                <div>
-
-                  <span className="icon-badge">
-                    <IconPin />
-                  </span>
-
-                  <div>
-
-                    <strong>
-                      Mumbai
-                    </strong>
-
-                    <span>
-                      Maharashtra, India
-                    </span>
-
-                  </div>
-
-                </div>
-
-
-                <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(
-                    CONTACT.addressFull
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-outline"
-                >
-                  Get Directions
+                  Get Started
                   <IconArrowRight />
-                </a>
-
+                </Link>
               </div>
-
             </div>
 
+            {/* QUICK ACTION CARD */}
+
+            <div className="contact-action-card">
+              <div className="contact-action-card__icon">
+                <IconHeadset />
+              </div>
+
+              <div className="contact-action-card__content">
+                <span className="eyebrow">
+                  We're Here For You
+                </span>
+
+                <h3>
+                  Need Help With Your{' '}
+                  <span className="text-cyan-dark">Move?</span>
+                </h3>
+
+                <p>
+                  Talk to our team and get guidance for your relocation
+                  requirements.
+                </p>
+
+                <div className="contact-action-card__buttons">
+                  <a
+                    href={`tel:${CONTACT.phone}`}
+                    className="btn btn-primary"
+                  >
+                    <IconPhone />
+                    Call Now
+                  </a>
+
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    className="btn btn-outline"
+                  >
+                    <IconMail />
+                    Email Us
+                  </a>
+                </div>
+              </div>
+            </div>
           </Reveal>
-
         </div>
-
       </section>
-
 
       {/* =====================================================
           WHY US
       ====================================================== */}
 
-      <section className="section section--raised">
-
+      <section className="section section--raised contact-why">
         <div className="container">
-
-          <div
-            className="services-head"
-            style={{
-              margin: '0 0 36px'
-            }}
-          >
-
-            <span className="eyebrow">
-              Why Get in Touch
-            </span>
+          <div className="services-head contact-why__head">
+            <span className="eyebrow">Why Get in Touch</span>
 
             <h2>
-              Why Get in Touch With Us?
+              Why Get in Touch With <span className="text-cyan-dark">Us?</span>
             </h2>
 
+            <p>
+              From your first enquiry to the final delivery, our team is
+              focused on making your move simple and stress-free.
+            </p>
           </div>
-
 
           <Reveal
             as="div"
             stagger
             className="trust-strip"
           >
-
-            {WHY_US.map((t) => (
-
+            {WHY_US.map((item) => (
               <div
-                key={t.title}
+                key={item.title}
                 className="trust-strip__item"
               >
-
-                <span className="icon-badge">
-                  {t.icon}
+                <span className="trust-strip__icon">
+                  {item.icon}
                 </span>
 
                 <div>
-
-                  <h4>
-                    {t.title}
-                  </h4>
-
-                  <p>
-                    {t.text}
-                  </p>
-
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
                 </div>
-
               </div>
-
             ))}
-
           </Reveal>
-
         </div>
-
       </section>
 
-
       {/* =====================================================
-          OPTIONAL SAME POPUP
+          QUOTE POPUP
       ====================================================== */}
 
       <QuotePopup
         isOpen={quoteOpen}
         onClose={() => setQuoteOpen(false)}
       />
-
-    </>
+    </div>
   );
 }

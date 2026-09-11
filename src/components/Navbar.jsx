@@ -1,61 +1,186 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+
 import logo from '../assets/logo-full.png';
-import { NAV_LINKS, CONTACT } from '../siteData';
+
+import {
+  NAV_LINKS,
+  CONTACT,
+} from '../siteData';
+
 import { IconPhone } from './Icons';
+
 import './Navbar.css';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const { pathname } = useLocation();
+
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    handleScroll();
+
+    window.addEventListener(
+      'scroll',
+      handleScroll
+    );
+
+    return () => {
+      window.removeEventListener(
+        'scroll',
+        handleScroll
+      );
+    };
   }, []);
 
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+
   return (
-    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <header
+      className={`navbar ${
+        scrolled
+          ? 'navbar--scrolled'
+          : ''
+      }`}
+    >
+
+      <div className="navbar__glow" />
+
       <div className="container navbar__inner">
-        <Link to="/" className="navbar__brand" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Hello Packers" className="navbar__logo" />
+
+
+        {/* LOGO */}
+
+        <Link
+          to="/"
+          className="navbar__brand"
+          onClick={() => setOpen(false)}
+        >
+
+          <img
+            src={logo}
+            alt="Hello Packers"
+            className="navbar__logo"
+          />
+
           <span className="navbar__wordmark">
             HELLO <em>PACKERS</em>
           </span>
+
         </Link>
 
-        <nav className={`navbar__links ${open ? 'navbar__links--open' : ''}`}>
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              className={({ isActive }) =>
-                isActive ? 'navbar__link navbar__link--active' : 'navbar__link'
-              }
-              onClick={() => setOpen(false)}
+
+        {/* NAVIGATION */}
+
+        <nav
+          className={`navbar__links ${
+            open
+              ? 'navbar__links--open'
+              : ''
+          }`}
+        >
+
+          <div className="navbar__menu">
+
+            {NAV_LINKS.map(
+              (link, index) => (
+
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.to === '/'}
+                  style={{
+                    '--i': index,
+                  }}
+                  className={({
+                    isActive,
+                  }) =>
+                    isActive
+                      ? 'navbar__link navbar__link--active'
+                      : 'navbar__link'
+                  }
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                >
+                  {link.label}
+                </NavLink>
+
+              )
+            )}
+
+          </div>
+
+
+          {/* ACTIONS */}
+
+          <div className="navbar__actions">
+
+            <a
+              href={`tel:${CONTACT.phone}`}
+              className="navbar__phone"
             >
-              {link.label}
-            </NavLink>
-          ))}
-          <a href={`tel:${CONTACT.phone}`} className="navbar__phone">
-            <IconPhone /> {CONTACT.phoneDisplay}
-          </a>
-          <Link to="/contact" className="btn btn-primary navbar__cta" onClick={() => setOpen(false)}>
-            Get a quote
-          </Link>
+
+              <span className="navbar__phone-ring">
+                <IconPhone />
+              </span>
+
+              <span>
+                {CONTACT.phoneDisplay}
+              </span>
+
+            </a>
+
+
+            <Link
+              to="/contact"
+              className="btn btn-primary navbar__cta"
+              onClick={() =>
+                setOpen(false)
+              }
+            >
+              Get a quote
+            </Link>
+
+          </div>
+
         </nav>
 
+
+        {/* MOBILE MENU */}
+
         <button
-          className="navbar__toggle"
+          type="button"
+          className={`navbar__toggle ${
+            open
+              ? 'navbar__toggle--open'
+              : ''
+          }`}
           aria-label="Toggle menu"
           aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() =>
+            setOpen((value) => !value)
+          }
         >
-          <span /><span /><span />
+
+          <span />
+          <span />
+          <span />
+
         </button>
+
       </div>
+
     </header>
   );
 }

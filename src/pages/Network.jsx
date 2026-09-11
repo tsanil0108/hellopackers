@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
-
 import Reveal from '../components/Reveal';
 
 import {
-  IconPhone,
-  IconMail,
-  IconPin,
   IconArrowRight,
   IconCheck,
   IconTruck,
   IconUsers,
+  IconPin,
 } from '../components/Icons';
 
 import './Network.css';
+
 
 /* =========================================================
    NETWORK LOGOS
@@ -29,7 +27,7 @@ import wellpackLogo from '../assets/network/wellpack.png';
 
 
 /* =========================================================
-   NETWORK PARTNERS DATA
+   PARTNER DATA
 ========================================================= */
 
 const NETWORK = [
@@ -37,10 +35,14 @@ const NETWORK = [
     id: 'a-packers',
     name: 'AP Packers & Movers',
     logo: aPackersLogo,
+
     phone: '8207008800',
     phoneAlt: '9773366455',
+
     email: 'info@apackersmovers.in',
+
     location: 'Kandivali East, Mumbai',
+
     services: [
       'Local',
       'Domestic',
@@ -52,10 +54,14 @@ const NETWORK = [
     id: 'first-choice',
     name: 'First Choice Packers & Movers',
     logo: firstLogo,
+
     phone: '9769646467',
     phoneAlt: '8286919181',
+
     email: '',
+
     location: 'Majiwada, Thane West',
+
     services: [
       'Home Shifting',
       'Car Transportation',
@@ -68,11 +74,16 @@ const NETWORK = [
     id: 'jaiswal',
     name: 'Jaiswal Packers & Movers',
     logo: jaiswalLogo,
+
     phone: '9082618076',
     phoneAlt: '8976299758',
+
     email: 'info@jaiswalpackers.in',
+
     website: 'jaiswalpackers.in',
+
     location: 'Andheri East, Mumbai',
+
     services: [
       'Household Goods',
       'Packing & Moving',
@@ -85,10 +96,14 @@ const NETWORK = [
     id: 'liberty',
     name: 'Liberty International Packers & Movers',
     logo: libertyLogo,
+
     phone: '8108964384',
     phoneAlt: '8369263560',
+
     email: 'libertyintlpackers@gmail.com',
+
     location: 'Kandivali East, Mumbai',
+
     services: [
       'Home Shifting',
       'Office Shifting',
@@ -101,16 +116,21 @@ const NETWORK = [
     id: 'patel',
     name: 'Patel Cargo Packers & Movers',
     logo: patelLogo,
+
     phone: '9320434546',
     phoneAlt: '9322070217',
+
     email: 'help.patelpackersmovers@gmail.com',
+
     website: 'patelpackersmover.com',
+
     location: 'Thane West, Maharashtra',
+
     services: [
       'Shifting',
       'Transportation',
       'Packing',
-      'Moving Accessories',
+      'Moving',
     ],
   },
 
@@ -118,11 +138,16 @@ const NETWORK = [
     id: 'rk-cargo',
     name: 'R K Cargo',
     logo: rkLogo,
+
     phone: '9833414143',
     phoneAlt: '9867653676',
+
     email: 'rkcargorelocationandlogistics@gmail.com',
+
     website: 'rkcargopackers.com',
+
     location: 'Balkum Naka, Thane West',
+
     services: [
       'Relocation',
       'Logistics',
@@ -134,10 +159,14 @@ const NETWORK = [
     id: 'shifting-hub',
     name: 'The Shifting Hub',
     logo: shiftingHubLogo,
+
     phone: '',
     phoneAlt: '',
+
     email: '',
+
     location: 'Mumbai & Maharashtra',
+
     services: [
       'Home Shifting',
       'Office Shifting',
@@ -151,10 +180,14 @@ const NETWORK = [
     id: 'wellpack',
     name: 'Well Pack Logistics',
     logo: wellpackLogo,
+
     phone: '9867416009',
     phoneAlt: '',
+
     email: '',
+
     location: 'Mumbai, Maharashtra',
+
     services: [
       'Home Shifting',
       'Office Shifting',
@@ -226,60 +259,98 @@ const INITIAL_FORM = {
 ========================================================= */
 
 export default function Network() {
+
   const [activeLogo, setActiveLogo] = useState(0);
 
-  const [selectedPacker, setSelectedPacker] = useState(null);
+  const [selectedPacker, setSelectedPacker] =
+    useState(null);
 
-  const [form, setForm] = useState(INITIAL_FORM);
+  const [form, setForm] =
+    useState(INITIAL_FORM);
 
-  const [sending, setSending] = useState(false);
+  const [sending, setSending] =
+    useState(false);
 
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] =
+    useState(false);
 
 
   /* =======================================================
-     HERO LOGO AUTO ROTATION
+     LOGO AUTO ROTATION
   ======================================================= */
 
   useEffect(() => {
-    const interval = setInterval(() => {
+
+    const timer = setInterval(() => {
+
       setActiveLogo(
         (current) =>
           (current + 1) % NETWORK_LOGOS.length
       );
+
     }, 2800);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
+
   }, []);
 
 
   /* =======================================================
-     OPEN QUOTE MODAL
+     LOCK BODY WHEN MODAL OPEN
+  ======================================================= */
+
+  useEffect(() => {
+
+    if (selectedPacker) {
+      document.body.classList.add(
+        'network-modal-open'
+      );
+    } else {
+      document.body.classList.remove(
+        'network-modal-open'
+      );
+    }
+
+    return () => {
+      document.body.classList.remove(
+        'network-modal-open'
+      );
+    };
+
+  }, [selectedPacker]);
+
+
+  /* =======================================================
+     OPEN QUOTE
   ======================================================= */
 
   const openQuote = (packer) => {
-    setSelectedPacker(packer);
-    setSent(false);
-    setForm(INITIAL_FORM);
 
-    document.body.classList.add(
-      'network-modal-open'
-    );
+    setSelectedPacker(packer);
+
+    setSent(false);
+
+    setForm({
+      ...INITIAL_FORM,
+      service:
+        packer.services?.[0] || '',
+    });
+
   };
 
 
   /* =======================================================
-     CLOSE QUOTE MODAL
+     CLOSE QUOTE
   ======================================================= */
 
   const closeQuote = () => {
+
     setSelectedPacker(null);
+
     setSent(false);
+
     setForm(INITIAL_FORM);
 
-    document.body.classList.remove(
-      'network-modal-open'
-    );
   };
 
 
@@ -288,32 +359,33 @@ export default function Network() {
   ======================================================= */
 
   const update = (field) => (event) => {
+
     setForm((current) => ({
       ...current,
       [field]: event.target.value,
     }));
+
   };
 
 
   /* =======================================================
-     SUBMIT FORM — WEB3FORMS
+     WEB3FORMS
   ======================================================= */
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
 
-    if (!selectedPacker) {
-      return;
-    }
+    if (!selectedPacker) return;
 
     setSending(true);
+
 
     const data = new FormData();
 
     /*
       IMPORTANT:
-      Replace this with your actual Web3Forms
-      Access Key.
+      Replace this with your Web3Forms Access Key.
     */
 
     data.append(
@@ -323,7 +395,7 @@ export default function Network() {
 
     data.append(
       'subject',
-      `Hello Packers Quote Request — ${selectedPacker.name}`
+      `Quote Request - ${selectedPacker.name}`
     );
 
     data.append(
@@ -378,6 +450,7 @@ export default function Network() {
 
 
     try {
+
       const response = await fetch(
         'https://api.web3forms.com/submit',
         {
@@ -386,24 +459,36 @@ export default function Network() {
         }
       );
 
-      const result = await response.json();
+      const result =
+        await response.json();
+
 
       if (result.success) {
+
         setSent(true);
+
       } else {
+
         alert(
           'Something went wrong. Please try again.'
         );
+
       }
+
     } catch (error) {
+
       console.error(error);
 
       alert(
         'Unable to send your request. Please try again.'
       );
+
     } finally {
+
       setSending(false);
+
     }
+
   };
 
 
@@ -412,79 +497,83 @@ export default function Network() {
   ======================================================= */
 
   return (
-    <>
-      {/* ===================================================
+    <div className="network-page">
+
+
+      {/* =====================================================
           HERO
-      =================================================== */}
+      ====================================================== */}
 
       <section className="network-hero">
 
-        <div className="network-hero__container">
+        <div className="network-hero__glow network-hero__glow--one" />
+        <div className="network-hero__glow network-hero__glow--two" />
+
+        <div className="container network-hero__container">
+
 
           {/* LEFT */}
 
           <Reveal className="network-hero__content">
 
-            <div className="network-hero__eyebrow">
-              <span>
-                OUR NETWORK
-              </span>
-
-              <i />
-            </div>
+            <span className="network-hero__eyebrow">
+              OUR NETWORK
+            </span>
 
 
             <h1>
-              Trusted Packers{' '}
-              <span>
-                Across
-              </span>
-
+              Trusted Packers
               <br />
-
-              <span>
-                Mumbai
-              </span>
+              <span>Across Mumbai</span>
             </h1>
 
 
             <p>
-              Connect with trusted relocation
-              partners from the Hello Packers
-              network for home shifting, office
-              relocation, transportation, packing
-              and storage requirements.
+              Connect with trusted relocation partners
+              from the Hello Packers network for home
+              shifting, office relocation, transportation,
+              packing and storage requirements.
             </p>
 
 
             <div className="network-hero__trust">
 
-              <div>
-                <IconUsers />
+              <div className="network-hero__trust-item">
+
                 <span>
+                  <IconUsers />
+                </span>
+
+                <strong>
                   Verified Network
-                </span>
+                </strong>
+
               </div>
 
-              <div>
-                <IconCheck />
+
+              <div className="network-hero__trust-item">
+
                 <span>
+                  <IconCheck />
+                </span>
+
+                <strong>
                   Reliable Partners
-                </span>
+                </strong>
+
               </div>
 
-              <div>
-                <IconTruck />
+
+              <div className="network-hero__trust-item">
+
                 <span>
+                  <IconTruck />
+                </span>
+
+                <strong>
                   Moving Solutions
-                </span>
-              </div>
+                </strong>
 
-              <div>
-                <IconCheck />
-                <span>
-                  Easy Enquiry
-                </span>
               </div>
 
             </div>
@@ -492,7 +581,7 @@ export default function Network() {
           </Reveal>
 
 
-          {/* RIGHT — ROTATING LOGO */}
+          {/* RIGHT */}
 
           <Reveal
             className="network-hero__visual"
@@ -501,18 +590,41 @@ export default function Network() {
             }}
           >
 
-            <div className="network-hero__logo-box">
+            <div className="network-hero__logo-card">
 
-              <img
-                key={NETWORK_LOGOS[activeLogo].name}
-                src={
-                  NETWORK_LOGOS[activeLogo].logo
-                }
-                alt={
-                  NETWORK_LOGOS[activeLogo].name
-                }
-                className="network-hero__logo"
-              />
+
+              <div className="network-hero__logo-label">
+                <span>
+                  HELLO PACKERS
+                </span>
+
+                NETWORK
+              </div>
+
+
+              <div className="network-hero__logo-stage">
+
+                <img
+                  key={NETWORK_LOGOS[activeLogo].name}
+                  src={NETWORK_LOGOS[activeLogo].logo}
+                  alt={NETWORK_LOGOS[activeLogo].name}
+                  className="network-hero__logo"
+                />
+
+              </div>
+
+
+              <div className="network-hero__partner">
+
+                <span>
+                  NETWORK PARTNER
+                </span>
+
+                <strong>
+                  {NETWORK_LOGOS[activeLogo].name}
+                </strong>
+
+              </div>
 
 
               <div className="network-hero__script">
@@ -525,11 +637,12 @@ export default function Network() {
               <div className="network-hero__dots">
 
                 {NETWORK_LOGOS.map(
-                  (item, index) => (
+                  (partner, index) => (
+
                     <button
-                      key={item.name}
+                      key={partner.name}
                       type="button"
-                      aria-label={`Show ${item.name}`}
+                      aria-label={`Show ${partner.name}`}
                       className={
                         index === activeLogo
                           ? 'active'
@@ -539,6 +652,7 @@ export default function Network() {
                         setActiveLogo(index)
                       }
                     />
+
                   )
                 )}
 
@@ -553,49 +667,58 @@ export default function Network() {
       </section>
 
 
-      {/* ===================================================
+      {/* =====================================================
           NETWORK PARTNERS
-      =================================================== */}
+      ====================================================== */}
 
-      <section className="section network-section">
+      <section className="network-section">
+
+        <div className="network-section__orb network-section__orb--one" />
+        <div className="network-section__orb network-section__orb--two" />
 
         <div className="container">
 
-          <div className="network-heading">
 
-            <div>
+          {/* HEADING */}
 
-              <span className="eyebrow">
+          <Reveal className="network-heading">
+
+            <div className="network-heading__content">
+
+              <span className="network-eyebrow">
                 HELLO PACKERS NETWORK
               </span>
 
               <h2>
-                Our Trusted Moving Partners
+                Our Trusted
+                <span> Moving Partners</span>
               </h2>
 
               <p>
-                Choose a moving partner based on
-                your requirement and send your
-                enquiry directly through Hello Packers.
+                Choose a trusted moving partner based on
+                your requirement and send your enquiry
+                through Hello Packers.
               </p>
 
             </div>
 
 
-            <div className="network-heading__badge">
+            <div className="network-heading__count">
+
+              <strong>
+                {NETWORK.length}
+              </strong>
 
               <span>
-                {NETWORK.length}
-              </span>
-
-              <small>
                 Network Partners
-              </small>
+              </span>
 
             </div>
 
-          </div>
+          </Reveal>
 
+
+          {/* PARTNER GRID */}
 
           <Reveal
             as="div"
@@ -610,20 +733,34 @@ export default function Network() {
                 className="network-card"
               >
 
-                {/* LOGO */}
 
-                <div className="network-card__logo">
+                {/* CARD HEADER */}
 
-                  <img
-                    src={packer.logo}
-                    alt={`${packer.name} logo`}
-                    loading="lazy"
-                  />
+                <div className="network-card__header">
+
+                  <div className="network-card__logo">
+
+                    <img
+                      src={packer.logo}
+                      alt={`${packer.name} logo`}
+                      loading="lazy"
+                    />
+
+                  </div>
+
+
+                  <span className="network-card__verified">
+
+                    <IconCheck />
+
+                    Verified Partner
+
+                  </span>
 
                 </div>
 
 
-                {/* CONTENT */}
+                {/* CARD CONTENT */}
 
                 <div className="network-card__content">
 
@@ -636,73 +773,15 @@ export default function Network() {
 
                   <div className="network-card__location">
 
-                    <IconPin />
-
                     <span>
-                      {packer.location}
+                      <IconPin />
                     </span>
 
+                    <p>
+                      {packer.location}
+                    </p>
+
                   </div>
-
-
-                  {/* PHONE */}
-
-                  {packer.phone && (
-
-                    <a
-                      href={`tel:${packer.phone}`}
-                      className="network-card__contact"
-                    >
-
-                      <IconPhone />
-
-                      <span>
-                        {packer.phone}
-
-                        {packer.phoneAlt
-                          ? ` / ${packer.phoneAlt}`
-                          : ''}
-                      </span>
-
-                    </a>
-
-                  )}
-
-
-                  {/* EMAIL */}
-
-                  {packer.email && (
-
-                    <a
-                      href={`mailto:${packer.email}`}
-                      className="network-card__contact"
-                    >
-
-                      <IconMail />
-
-                      <span>
-                        {packer.email}
-                      </span>
-
-                    </a>
-
-                  )}
-
-
-                  {/* WEBSITE */}
-
-                  {packer.website && (
-
-                    <a
-                      href={`https://${packer.website}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="network-card__website"
-                    >
-                      {packer.website}
-                    </a>
-
-                  )}
 
 
                   {/* SERVICES */}
@@ -732,7 +811,9 @@ export default function Network() {
                     }
                   >
 
-                    Get a Quote
+                    <span>
+                      Get a Quote
+                    </span>
 
                     <IconArrowRight />
 
@@ -751,9 +832,9 @@ export default function Network() {
       </section>
 
 
-      {/* ===================================================
+      {/* =====================================================
           QUOTE MODAL
-      =================================================== */}
+      ====================================================== */}
 
       {selectedPacker && (
 
@@ -776,13 +857,14 @@ export default function Network() {
 
           <div className="network-modal__card">
 
+
             {/* CLOSE */}
 
             <button
               type="button"
               className="network-modal__close"
               onClick={closeQuote}
-              aria-label="Close quote form"
+              aria-label="Close"
             >
               ×
             </button>
@@ -792,11 +874,11 @@ export default function Network() {
 
               <>
 
-                {/* HEADER */}
+                {/* MODAL HEADER */}
 
                 <div className="network-modal__header">
 
-                  <span className="eyebrow">
+                  <span className="network-eyebrow">
                     GET A QUOTE
                   </span>
 
@@ -805,46 +887,35 @@ export default function Network() {
                   </h2>
 
                   <p>
-                    Your enquiry will be sent
-                    regarding:
+                    Send your moving requirement
+                    to Hello Packers.
                   </p>
+
+
+                  {/* SELECTED PARTNER */}
 
                   <div className="network-modal__selected">
 
-                    <img
-                      src={selectedPacker.logo}
-                      alt=""
-                    />
+                    <div className="network-modal__selected-logo">
 
-                    <strong>
-                      {selectedPacker.name}
-                    </strong>
+                      <img
+                        src={selectedPacker.logo}
+                        alt=""
+                      />
 
-                  </div>
+                    </div>
 
-                  <div className="network-modal__contact-info">
+                    <div>
 
-                    {selectedPacker.phone && (
-                      <a
-                        href={`tel:${selectedPacker.phone}`}
-                      >
-                        <IconPhone />
-                        {selectedPacker.phone}
+                      <strong>
+                        {selectedPacker.name}
+                      </strong>
 
-                        {selectedPacker.phoneAlt
-                          ? ` / ${selectedPacker.phoneAlt}`
-                          : ''}
-                      </a>
-                    )}
+                      <span>
+                        Selected Network Partner
+                      </span>
 
-                    {selectedPacker.email && (
-                      <a
-                        href={`mailto:${selectedPacker.email}`}
-                      >
-                        <IconMail />
-                        {selectedPacker.email}
-                      </a>
-                    )}
+                    </div>
 
                   </div>
 
@@ -857,6 +928,7 @@ export default function Network() {
                   className="network-form"
                   onSubmit={handleSubmit}
                 >
+
 
                   <div className="network-form__row">
 
@@ -1050,9 +1122,11 @@ export default function Network() {
                     disabled={sending}
                   >
 
-                    {sending
-                      ? 'Sending...'
-                      : 'Send Quote Request'}
+                    <span>
+                      {sending
+                        ? 'Sending...'
+                        : 'Send Quote Request'}
+                    </span>
 
                     {!sending && (
                       <IconArrowRight />
@@ -1061,7 +1135,7 @@ export default function Network() {
                   </button>
 
 
-                  <p className="network-form__privacy">
+                  <p className="network-form__note">
                     Your details are used only
                     to respond to your enquiry.
                   </p>
@@ -1072,53 +1146,38 @@ export default function Network() {
 
             ) : (
 
-              /* =================================================
-                 SUCCESS
-              ================================================= */
+              /* SUCCESS */
 
               <div className="network-success">
 
                 <div className="network-success__icon">
-
                   <IconCheck />
-
                 </div>
 
-
-                <span className="eyebrow">
+                <span className="network-eyebrow">
                   REQUEST SENT
                 </span>
-
 
                 <h2>
                   Thank You!
                 </h2>
 
-
                 <p>
-
-                  Your quote request for{' '}
-
+                  Your quote request for
                   <strong>
-                    {selectedPacker.name}
-                  </strong>{' '}
-
-                  has been submitted successfully.
+                    {' '}{selectedPacker.name}
+                  </strong>
+                  {' '}has been submitted successfully.
                   Our team will get back to you shortly.
-
                 </p>
-
 
                 <button
                   type="button"
                   onClick={closeQuote}
                   className="network-success__button"
                 >
-
                   Done
-
                   <IconArrowRight />
-
                 </button>
 
               </div>
@@ -1131,6 +1190,6 @@ export default function Network() {
 
       )}
 
-    </>
+    </div>
   );
 }

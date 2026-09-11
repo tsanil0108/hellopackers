@@ -15,6 +15,7 @@ import {
   IconHeadset,
   IconTruck,
   IconCheck,
+  IconPin,
 } from '../components/Icons';
 
 import photos from '../assets/photos';
@@ -25,113 +26,613 @@ import {
   CITIES,
 } from '../siteData';
 
-import wellpackLogo from '../assets/network/wellpack.png';
 import aPackersLogo from '../assets/network/a-packers.png';
+import firstLogo from '../assets/network/first.png';
+import jaiswalLogo from '../assets/network/jaiswal.png';
+import libertyLogo from '../assets/network/liberty.png';
+import patelLogo from '../assets/network/patel.png';
+import rkLogo from '../assets/network/rk.png';
+import shiftingHubLogo from '../assets/network/shifting hub.png';
+import wellpackLogo from '../assets/network/wellpack.png';
 
 import './Home.css';
 
-const HOME_SERVICES = SERVICES.slice(0, 5);
+
+const HOME_SERVICES =
+  SERVICES.slice(0, 5);
+
+
+/* =========================================================
+   WHY CHOOSE US
+========================================================= */
 
 const ABOUT_POINTS = [
+
   {
     icon: <IconUsers />,
     label: 'Trained & Verified Staff',
   },
+
   {
     icon: <IconShield />,
     label: 'Safe & Secure Handling',
   },
+
   {
     icon: <IconRupee />,
     label: 'Affordable Pricing',
   },
+
   {
     icon: <IconClock />,
     label: 'On-Time Delivery',
   },
+
   {
     icon: <IconTruck />,
     label: 'Pan India Service',
   },
+
   {
     icon: <IconHeadset />,
     label: '24/7 Customer Support',
   },
+
 ];
 
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
 const PROCESS = [
+
   {
     number: '01',
     title: 'Get a Quote',
-    text: 'Share your moving requirements and get a quick quotation.',
+    text:
+      'Share your moving requirements and get a quick quotation.',
   },
+
   {
     number: '02',
     title: 'Plan Your Move',
-    text: 'Our team understands your requirements and plans everything.',
+    text:
+      'Our team understands your requirements and plans everything.',
   },
+
   {
     number: '03',
     title: 'Pack & Move',
-    text: 'Your belongings are packed carefully and moved securely.',
+    text:
+      'Your belongings are packed carefully and moved securely.',
   },
+
   {
     number: '04',
     title: 'Safe Delivery',
-    text: 'We deliver your belongings safely to your new destination.',
+    text:
+      'We deliver your belongings safely to your new destination.',
   },
+
 ];
+
+
+/* =========================================================
+   NETWORK PARTNERS
+========================================================= */
 
 const NETWORK_PARTNERS = [
+
   {
-    id: 'wellpack',
-    name: 'WellPack Logistics',
-    logo: wellpackLogo,
-    location: 'Mumbai',
-    description:
-      'Reliable relocation, transportation, office shifting and warehousing solutions.',
-    services: ['Home Shifting', 'Office Shifting', 'Warehousing'],
-  },
-  {
-    id: 'ap-packers',
+    id: 'a-packers',
+
     name: 'AP Packers & Movers',
+
     logo: aPackersLogo,
-    location: 'Kandivali East, Mumbai',
+
+    phone: '8207008800',
+
+    phoneAlt: '9773366455',
+
+    email:
+      'info@apackersmovers.in',
+
+    location:
+      'Kandivali East, Mumbai',
+
     description:
       'Professional packing and moving support for residential and commercial relocation.',
-    services: ['Home Relocation', 'Office Relocation', 'Transportation'],
+
+    services: [
+      'Local',
+      'Domestic',
+      'International',
+    ],
   },
+
+
+  {
+    id: 'first-choice',
+
+    name:
+      'First Choice Packers & Movers',
+
+    logo: firstLogo,
+
+    phone: '9769646467',
+
+    phoneAlt: '8286919181',
+
+    email: '',
+
+    location:
+      'Majiwada, Thane West',
+
+    description:
+      'Reliable shifting and transportation support for homes, vehicles and commercial moves.',
+
+    services: [
+      'Home Shifting',
+      'Car Transportation',
+      'Bike Transportation',
+      'Commercial Shifting',
+    ],
+  },
+
+
+  {
+    id: 'jaiswal',
+
+    name:
+      'Jaiswal Packers & Movers',
+
+    logo: jaiswalLogo,
+
+    phone: '9082618076',
+
+    phoneAlt: '8976299758',
+
+    email:
+      'info@jaiswalpackers.in',
+
+    website:
+      'jaiswalpackers.in',
+
+    location:
+      'Andheri East, Mumbai',
+
+    description:
+      'Complete relocation support with packing, moving, storage and vehicle transportation.',
+
+    services: [
+      'Household Goods',
+      'Packing & Moving',
+      'Storage',
+      'Bike & Car',
+    ],
+  },
+
+
+  {
+    id: 'liberty',
+
+    name:
+      'Liberty International Packers & Movers',
+
+    logo: libertyLogo,
+
+    phone: '8108964384',
+
+    phoneAlt: '8369263560',
+
+    email:
+      'libertyintlpackers@gmail.com',
+
+    location:
+      'Kandivali East, Mumbai',
+
+    description:
+      'Professional relocation, warehousing and transportation solutions for smooth moves.',
+
+    services: [
+      'Home Shifting',
+      'Office Shifting',
+      'Warehousing',
+      'Transportation',
+    ],
+  },
+
+
+  {
+    id: 'patel',
+
+    name:
+      'Patel Cargo Packers & Movers',
+
+    logo: patelLogo,
+
+    phone: '9320434546',
+
+    phoneAlt: '9322070217',
+
+    email:
+      'help.patelpackersmovers@gmail.com',
+
+    website:
+      'patelpackersmover.com',
+
+    location:
+      'Thane West, Maharashtra',
+
+    description:
+      'Reliable packing, shifting and transportation support for different relocation needs.',
+
+    services: [
+      'Shifting',
+      'Transportation',
+      'Packing',
+      'Moving',
+    ],
+  },
+
+
+  {
+    id: 'rk-cargo',
+
+    name: 'R K Cargo',
+
+    logo: rkLogo,
+
+    phone: '9833414143',
+
+    phoneAlt: '9867653676',
+
+    email:
+      'rkcargorelocationandlogistics@gmail.com',
+
+    website:
+      'rkcargopackers.com',
+
+    location:
+      'Balkum Naka, Thane West',
+
+    description:
+      'Relocation and logistics support for moving requirements across India.',
+
+    services: [
+      'Relocation',
+      'Logistics',
+      'All India Moving',
+    ],
+  },
+
+
+  {
+    id: 'shifting-hub',
+
+    name: 'The Shifting Hub',
+
+    logo: shiftingHubLogo,
+
+    phone: '',
+
+    phoneAlt: '',
+
+    email: '',
+
+    location:
+      'Mumbai & Maharashtra',
+
+    description:
+      'Complete moving support including packing, storage and vehicle transportation.',
+
+    services: [
+      'Home Shifting',
+      'Office Shifting',
+      'Packing & Moving',
+      'Storage',
+      'Vehicle Transportation',
+    ],
+  },
+
+
+  {
+    id: 'wellpack',
+
+    name: 'Well Pack Logistics',
+
+    logo: wellpackLogo,
+
+    phone: '9867416009',
+
+    phoneAlt: '',
+
+    email: '',
+
+    location:
+      'Mumbai, Maharashtra',
+
+    description:
+      'Reliable logistics and relocation support for homes, offices and warehousing needs.',
+
+    services: [
+      'Home Shifting',
+      'Office Shifting',
+      'Warehousing',
+      'Transportation',
+    ],
+  },
+
 ];
 
+
+const INITIAL_PARTNER_FORM = {
+  name: '',
+  phone: '',
+  email: '',
+  from: '',
+  to: '',
+  date: '',
+  service: '',
+  message: '',
+};
+
+
 export default function Home() {
-  const [quoteOpen, setQuoteOpen] = useState(false);
+
+  const [quoteOpen, setQuoteOpen] =
+    useState(false);
+
+  const [selectedPartner, setSelectedPartner] =
+    useState(null);
+
+  const [partnerForm, setPartnerForm] =
+    useState(INITIAL_PARTNER_FORM);
+
+  const [partnerSending, setPartnerSending] =
+    useState(false);
+
+  const [partnerSent, setPartnerSent] =
+    useState(false);
+
 
   const openQuote = () => {
     setQuoteOpen(true);
   };
 
+
   const closeQuote = () => {
     setQuoteOpen(false);
   };
 
+
+  const openPartnerQuote = (partner) => {
+
+    setSelectedPartner(partner);
+
+    setPartnerSent(false);
+
+    setPartnerForm({
+      ...INITIAL_PARTNER_FORM,
+
+      service:
+        partner.services?.[0] || '',
+    });
+
+    document.body.classList.add(
+      'network-modal-open'
+    );
+  };
+
+
+  const closePartnerQuote = () => {
+
+    setSelectedPartner(null);
+
+    setPartnerSent(false);
+
+    setPartnerForm(
+      INITIAL_PARTNER_FORM
+    );
+
+    document.body.classList.remove(
+      'network-modal-open'
+    );
+  };
+
+
+  const updatePartnerForm =
+    (field) =>
+    (event) => {
+
+      setPartnerForm(
+        (current) => ({
+          ...current,
+
+          [field]:
+            event.target.value,
+        })
+      );
+
+    };
+
+
+  const submitPartnerQuote =
+    async (event) => {
+
+      event.preventDefault();
+
+      if (!selectedPartner) {
+        return;
+      }
+
+      setPartnerSending(true);
+
+
+      const data =
+        new FormData();
+
+
+      /*
+        IMPORTANT:
+        Replace this with your
+        real Web3Forms access key.
+      */
+
+      data.append(
+        'access_key',
+        'YOUR_WEB3FORMS_ACCESS_KEY'
+      );
+
+
+      data.append(
+        'subject',
+        `Quote Request - ${selectedPartner.name}`
+      );
+
+
+      data.append(
+        'from_name',
+        'Hello Packers Website'
+      );
+
+
+      data.append(
+        'name',
+        partnerForm.name
+      );
+
+
+      data.append(
+        'phone',
+        partnerForm.phone
+      );
+
+
+      data.append(
+        'email',
+        partnerForm.email
+      );
+
+
+      data.append(
+        'moving_from',
+        partnerForm.from
+      );
+
+
+      data.append(
+        'moving_to',
+        partnerForm.to
+      );
+
+
+      data.append(
+        'moving_date',
+        partnerForm.date
+      );
+
+
+      data.append(
+        'service',
+        partnerForm.service
+      );
+
+
+      data.append(
+        'message',
+        partnerForm.message
+      );
+
+
+      data.append(
+        'selected_partner',
+        selectedPartner.name
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            'https://api.web3forms.com/submit',
+            {
+              method: 'POST',
+              body: data,
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (result.success) {
+
+          setPartnerSent(true);
+
+        } else {
+
+          alert(
+            'Something went wrong. Please try again.'
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          'Unable to send your request. Please try again.'
+        );
+
+      } finally {
+
+        setPartnerSending(false);
+
+      }
+
+    };
+
+
   return (
     <>
+
       {/* =====================================================
           HERO
       ====================================================== */}
 
       <section className="home-hero">
-        <div className="home-hero__glow home-hero__glow--one" />
-        <div className="home-hero__glow home-hero__glow--two" />
+
+        <div
+          className="
+            home-hero__glow
+            home-hero__glow--one
+          "
+        />
+
+        <div
+          className="
+            home-hero__glow
+            home-hero__glow--two
+          "
+        />
+
 
         <div className="container home-hero__grid">
 
           <Reveal className="home-hero__copy">
 
             <span className="home-hero__eyebrow">
+
               <span className="home-hero__eyebrow-dot" />
+
               Packers & Movers in Mumbai
+
             </span>
+
 
             <h1>
               Move Smarter,
@@ -139,76 +640,107 @@ export default function Home() {
               <span>Live Better</span>
             </h1>
 
+
             <p className="home-hero__tagline">
               Safe. Reliable. Hassle-Free Relocation.
             </p>
 
+
             <p className="home-hero__desc">
-              At Hello Packers, we make your move simple, secure and
-              stress-free. From careful packing to safe delivery, your
+              At Hello Packers, we make your move
+              simple, secure and stress-free. From
+              careful packing to safe delivery, your
               belongings are always handled with care.
             </p>
+
 
             <div className="home-hero__actions">
 
               <button
                 type="button"
-                className="home-btn home-btn--primary"
+                className="
+                  home-btn
+                  home-btn--primary
+                "
                 onClick={openQuote}
               >
                 Get a Free Quote
+
                 <IconArrowRight />
+
               </button>
+
 
               <Link
                 to="/services"
-                className="home-btn home-btn--secondary"
+                className="
+                  home-btn
+                  home-btn--secondary
+                "
               >
                 Explore Services
+
                 <IconArrowRight />
+
               </Link>
 
             </div>
 
+
             <div className="home-hero__trust">
 
               <div className="home-trust-item">
+
                 <span className="home-trust-item__icon">
                   <IconShield />
                 </span>
+
                 <span>
                   <strong>Safe</strong>
                   Secure Handling
                 </span>
+
               </div>
 
+
               <div className="home-trust-item">
+
                 <span className="home-trust-item__icon">
                   <IconClock />
                 </span>
+
                 <span>
                   <strong>On-Time</strong>
                   Delivery
                 </span>
+
               </div>
 
+
               <div className="home-trust-item">
+
                 <span className="home-trust-item__icon">
                   <IconUsers />
                 </span>
+
                 <span>
                   <strong>Professional</strong>
                   Team
                 </span>
+
               </div>
 
             </div>
 
           </Reveal>
 
+
           <Reveal
             className="home-hero__media"
-            style={{ transitionDelay: '0.15s' }}
+            style={{
+              transitionDelay:
+                '0.15s',
+            }}
           >
 
             <div className="home-hero__image-wrap">
@@ -220,33 +752,47 @@ export default function Home() {
 
               <div className="home-hero__image-overlay" />
 
-              <div className="home-hero__floating-card home-hero__floating-card--top">
+
+              <div
+                className="
+                  home-hero__floating-card
+                  home-hero__floating-card--top
+                "
+              >
+
                 <span className="floating-card__icon">
                   <IconCheck />
                 </span>
-                <div>
-                  <strong>Trusted Moving</strong>
-                  <small>Professional Service</small>
-                </div>
-              </div>
 
-              <div className="home-hero__floating-card home-hero__floating-card--bottom">
-                <span className="floating-card__number">500+</span>
                 <div>
-                  <strong>Happy Customers</strong>
-                  <small>Successful relocations</small>
+
+                  <strong>
+                    Trusted Moving
+                  </strong>
+
+                  <small>
+                    Professional Service
+                  </small>
+
                 </div>
+
               </div>
 
             </div>
 
+
             <div className="home-hero__stats">
-              <StatBar items={STATS.slice(0, 3)} />
+
+              <StatBar
+                items={STATS.slice(0, 3)}
+              />
+
             </div>
 
           </Reveal>
 
         </div>
+
       </section>
 
 
@@ -261,6 +807,7 @@ export default function Home() {
           <Reveal className="home-section-heading">
 
             <div>
+
               <span className="home-section-eyebrow">
                 OUR SERVICES
               </span>
@@ -271,17 +818,23 @@ export default function Home() {
               </h2>
 
               <p>
-                From household shifting to office relocation, we take care
-                of every part of your move with professionalism and care.
+                From household shifting to office
+                relocation, we take care of every
+                part of your move with professionalism
+                and care.
               </p>
+
             </div>
+
 
             <Link
               to="/services"
               className="home-view-link"
             >
               View All Services
+
               <IconArrowRight />
+
             </Link>
 
           </Reveal>
@@ -293,49 +846,57 @@ export default function Home() {
             className="home-services__grid"
           >
 
-            {HOME_SERVICES.map((service, index) => (
+            {HOME_SERVICES.map(
+              (service, index) => (
 
-              <Link
-                to="/services"
-                className="home-service-card"
-                key={service.id}
-              >
+                <Link
+                  to="/services"
+                  className="home-service-card"
+                  key={service.id}
+                >
 
-                <div className="home-service-card__number">
-                  0{index + 1}
-                </div>
+                  <div className="home-service-card__number">
+                    0{index + 1}
+                  </div>
 
-                <div className="home-service-card__media">
 
-                  <img
-                    src={photos[service.img]}
-                    alt={service.title}
-                    loading="lazy"
-                  />
+                  <div className="home-service-card__media">
 
-                  <div className="home-service-card__media-overlay" />
+                    <img
+                      src={
+                        photos[
+                          service.img
+                        ]
+                      }
+                      alt={service.title}
+                      loading="lazy"
+                    />
 
-                </div>
+                    <div className="home-service-card__media-overlay" />
 
-                <div className="home-service-card__body">
+                  </div>
 
-                  <h3>
-                    {service.title}
-                  </h3>
 
-                  <p>
-                    {service.summary}
-                  </p>
+                  <div className="home-service-card__body">
 
-                  <span className="home-service-card__arrow">
-                    <IconArrowRight />
-                  </span>
+                    <h3>
+                      {service.title}
+                    </h3>
 
-                </div>
+                    <p>
+                      {service.summary}
+                    </p>
 
-              </Link>
+                    <span className="home-service-card__arrow">
+                      <IconArrowRight />
+                    </span>
 
-            ))}
+                  </div>
+
+                </Link>
+
+              )
+            )}
 
           </Reveal>
 
@@ -345,12 +906,13 @@ export default function Home() {
 
 
       {/* =====================================================
-          WHY CHOOSE US
+          ABOUT
       ====================================================== */}
 
       <section className="section home-about">
 
         <div className="home-about__background" />
+
 
         <div className="container home-about__grid">
 
@@ -368,6 +930,7 @@ export default function Home() {
 
             </div>
 
+
             <div className="home-about__badge">
 
               <span className="home-about__badge-icon">
@@ -375,8 +938,15 @@ export default function Home() {
               </span>
 
               <div>
-                <strong>Trusted</strong>
-                <small>Moving Partner</small>
+
+                <strong>
+                  Trusted
+                </strong>
+
+                <small>
+                  Moving Partner
+                </small>
+
               </div>
 
             </div>
@@ -386,12 +956,16 @@ export default function Home() {
 
           <Reveal
             className="home-about__content"
-            style={{ transitionDelay: '0.12s' }}
+            style={{
+              transitionDelay:
+                '0.12s',
+            }}
           >
 
             <span className="home-section-eyebrow">
               WHY CHOOSE HELLO PACKERS
             </span>
+
 
             <h2>
               Your Trusted
@@ -399,42 +973,55 @@ export default function Home() {
               <span>Moving Partner</span>
             </h2>
 
+
             <p className="home-about__intro">
-              At Hello Packers, we believe moving is not just about shifting
-              items, but about moving lives with care. With professional
-              expertise, modern equipment and a customer-first approach,
-              we make your relocation journey smooth and worry-free.
+              At Hello Packers, we believe moving
+              is not just about shifting items, but
+              about moving lives with care. With
+              professional expertise, modern
+              equipment and a customer-first
+              approach, we make your relocation
+              journey smooth and worry-free.
             </p>
+
 
             <div className="home-about__points">
 
-              {ABOUT_POINTS.map((point) => (
+              {ABOUT_POINTS.map(
+                (point) => (
 
-                <div
-                  className="home-about__point"
-                  key={point.label}
-                >
+                  <div
+                    className="home-about__point"
+                    key={point.label}
+                  >
 
-                  <span className="home-about__point-icon">
-                    {point.icon}
-                  </span>
+                    <span className="home-about__point-icon">
+                      {point.icon}
+                    </span>
 
-                  <span>
-                    {point.label}
-                  </span>
+                    <span>
+                      {point.label}
+                    </span>
 
-                </div>
+                  </div>
 
-              ))}
+                )
+              )}
 
             </div>
 
+
             <Link
               to="/about"
-              className="home-btn home-btn--dark"
+              className="
+                home-btn
+                home-btn--dark
+              "
             >
               Know More About Us
+
               <IconArrowRight />
+
             </Link>
 
           </Reveal>
@@ -445,14 +1032,19 @@ export default function Home() {
 
 
       {/* =====================================================
-          HOW IT WORKS
+          PROCESS
       ====================================================== */}
 
       <section className="section home-process">
 
         <div className="container">
 
-          <Reveal className="home-section-heading home-section-heading--center">
+          <Reveal
+            className="
+              home-section-heading
+              home-section-heading--center
+            "
+          >
 
             <span className="home-section-eyebrow">
               HOW IT WORKS
@@ -464,7 +1056,8 @@ export default function Home() {
             </h2>
 
             <p>
-              Four simple steps from your first enquiry to a safe delivery.
+              Four simple steps from your first
+              enquiry to a safe delivery.
             </p>
 
           </Reveal>
@@ -476,38 +1069,43 @@ export default function Home() {
             className="home-process__grid"
           >
 
-            {PROCESS.map((step) => (
+            {PROCESS.map(
+              (step) => (
 
-              <div
-                className="home-process-card"
-                key={step.number}
-              >
+                <div
+                  className="home-process-card"
+                  key={step.number}
+                >
 
-                <div className="home-process-card__top">
+                  <div className="home-process-card__top">
 
-                  <span className="home-process-card__number">
-                    {step.number}
-                  </span>
+                    <span className="home-process-card__number">
+                      {step.number}
+                    </span>
 
-                  <span className="home-process-card__check">
-                    <IconCheck />
-                  </span>
+                    <span className="home-process-card__check">
+                      <IconCheck />
+                    </span>
+
+                  </div>
+
+
+                  <h3>
+                    {step.title}
+                  </h3>
+
+
+                  <p>
+                    {step.text}
+                  </p>
+
+
+                  <div className="home-process-card__dot" />
 
                 </div>
 
-                <h3>
-                  {step.title}
-                </h3>
-
-                <p>
-                  {step.text}
-                </p>
-
-                <div className="home-process-card__dot" />
-
-              </div>
-
-            ))}
+              )
+            )}
 
           </Reveal>
 
@@ -517,12 +1115,13 @@ export default function Home() {
 
 
       {/* =====================================================
-          NETWORK
+          NETWORK — ALL 8 PARTNERS
       ====================================================== */}
 
       <section className="section home-network">
 
         <div className="home-network__glow" />
+
 
         <div className="container">
 
@@ -540,19 +1139,25 @@ export default function Home() {
               </h2>
 
               <p>
-                Connect with reliable relocation partners through the
-                Hello Packers network.
+                Connect with reliable relocation
+                partners through the Hello Packers
+                network for your moving requirements.
               </p>
 
             </div>
 
-            <Link
-              to="/network"
-              className="home-view-link"
-            >
-              View Network
-              <IconArrowRight />
-            </Link>
+
+            <div className="home-network__count">
+
+              <strong>
+                {NETWORK_PARTNERS.length}
+              </strong>
+
+              <span>
+                Network Partners
+              </span>
+
+            </div>
 
           </Reveal>
 
@@ -563,64 +1168,94 @@ export default function Home() {
             className="home-network__grid"
           >
 
-            {NETWORK_PARTNERS.map((partner) => (
+            {NETWORK_PARTNERS.map(
+              (partner) => (
 
-              <article
-                className="home-network-card"
-                key={partner.id}
-              >
+                <article
+                  className="home-network-card"
+                  key={partner.id}
+                >
 
-                <div className="home-network-card__logo">
+                  <div className="home-network-card__logo">
 
-                  <img
-                    src={partner.logo}
-                    alt={`${partner.name} logo`}
-                  />
-
-                </div>
-
-                <div className="home-network-card__content">
-
-                  <div className="home-network-card__verified">
-                    <IconCheck />
-                    Verified Network Partner
-                  </div>
-
-                  <h3>
-                    {partner.name}
-                  </h3>
-
-                  <p className="home-network-card__location">
-                    {partner.location}
-                  </p>
-
-                  <p className="home-network-card__description">
-                    {partner.description}
-                  </p>
-
-                  <div className="home-network-card__services">
-
-                    {partner.services.map((service) => (
-                      <span key={service}>
-                        {service}
-                      </span>
-                    ))}
+                    <img
+                      src={partner.logo}
+                      alt={`${partner.name} logo`}
+                      loading="lazy"
+                    />
 
                   </div>
 
-                  <Link
-                    to="/network"
-                    className="home-network-card__button"
-                  >
-                    Get a Quote
-                    <IconArrowRight />
-                  </Link>
 
-                </div>
+                  <div className="home-network-card__content">
 
-              </article>
+                    <div className="home-network-card__verified">
 
-            ))}
+                      <IconCheck />
+
+                      Verified Network Partner
+
+                    </div>
+
+
+                    <h3>
+                      {partner.name}
+                    </h3>
+
+
+                    <p className="home-network-card__location">
+
+                      <IconPin />
+
+                      {partner.location}
+
+                    </p>
+
+
+                    <p className="home-network-card__description">
+                      {partner.description}
+                    </p>
+
+
+                    <div className="home-network-card__services">
+
+                      {partner.services.map(
+                        (service) => (
+
+                          <span
+                            key={service}
+                          >
+                            {service}
+                          </span>
+
+                        )
+                      )}
+
+                    </div>
+
+
+                    <button
+                      type="button"
+                      className="home-network-card__button"
+                      onClick={() =>
+                        openPartnerQuote(
+                          partner
+                        )
+                      }
+                    >
+
+                      Get a Quote
+
+                      <IconArrowRight />
+
+                    </button>
+
+                  </div>
+
+                </article>
+
+              )
+            )}
 
           </Reveal>
 
@@ -631,19 +1266,29 @@ export default function Home() {
               <IconUsers />
             </div>
 
+
             <div>
+
               <strong>
-                Looking for more moving partners?
+                Looking for a reliable moving partner?
               </strong>
+
               <span>
-                Explore the complete Hello Packers Network.
+                Send your requirement through Hello Packers.
               </span>
+
             </div>
 
-            <Link to="/network">
-              Explore Network
+
+            <button
+              type="button"
+              onClick={openQuote}
+            >
+              Get a Free Quote
+
               <IconArrowRight />
-            </Link>
+
+            </button>
 
           </Reveal>
 
@@ -674,18 +1319,25 @@ export default function Home() {
               </h2>
 
               <p>
-                Based in Mumbai, Hello Packers provides reliable moving
-                solutions across major cities and destinations.
+                Based in Mumbai, Hello Packers
+                provides reliable moving solutions
+                across major cities and destinations.
               </p>
 
             </div>
 
+
             <Link
               to="/contact"
-              className="home-btn home-btn--primary"
+              className="
+                home-btn
+                home-btn--primary
+              "
             >
               Plan Your Move
+
               <IconArrowRight />
+
             </Link>
 
           </Reveal>
@@ -697,24 +1349,26 @@ export default function Home() {
             className="home-cities__list"
           >
 
-            {CITIES.map((city) => (
+            {CITIES.map(
+              (city) => (
 
-              <div
-                className="home-city"
-                key={city}
-              >
+                <div
+                  className="home-city"
+                  key={city}
+                >
 
-                <span className="home-city__icon">
-                  <IconCheck />
-                </span>
+                  <span className="home-city__icon">
+                    <IconCheck />
+                  </span>
 
-                <span>
-                  {city}
-                </span>
+                  <span>
+                    {city}
+                  </span>
 
-              </div>
+                </div>
 
-            ))}
+              )
+            )}
 
           </Reveal>
 
@@ -731,13 +1385,361 @@ export default function Home() {
 
 
       {/* =====================================================
-          QUOTE POPUP
+          NORMAL QUOTE POPUP
       ====================================================== */}
 
       <QuotePopup
         isOpen={quoteOpen}
         onClose={closeQuote}
       />
+
+
+      {/* =====================================================
+          PARTNER QUOTE MODAL
+      ====================================================== */}
+
+      {selectedPartner && (
+
+        <div
+          className="home-network-modal"
+          role="dialog"
+          aria-modal="true"
+          onMouseDown={(event) => {
+
+            if (
+              event.target ===
+              event.currentTarget
+            ) {
+              closePartnerQuote();
+            }
+
+          }}
+        >
+
+          <div className="home-network-modal__card">
+
+            <button
+              type="button"
+              className="home-network-modal__close"
+              onClick={closePartnerQuote}
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+
+            {!partnerSent ? (
+
+              <>
+
+                <div className="home-network-modal__header">
+
+                  <span className="home-section-eyebrow">
+                    GET A QUOTE
+                  </span>
+
+                  <h2>
+                    Request a Quote
+                  </h2>
+
+                  <p>
+                    Send your moving requirement
+                    to Hello Packers.
+                  </p>
+
+                </div>
+
+
+                {/* PARTNER */}
+
+                <div className="home-network-modal__partner">
+
+                  <div className="home-network-modal__partner-logo">
+
+                    <img
+                      src={selectedPartner.logo}
+                      alt=""
+                    />
+
+                  </div>
+
+
+                  <div>
+
+                    <strong>
+                      {selectedPartner.name}
+                    </strong>
+
+                    <span>
+                      {selectedPartner.location}
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                {/* FORM */}
+
+                <form
+                  className="home-network-form"
+                  onSubmit={
+                    submitPartnerQuote
+                  }
+                >
+
+                  <div className="home-network-form__grid">
+
+
+                    <label>
+
+                      <span>
+                        Full Name *
+                      </span>
+
+                      <input
+                        type="text"
+                        value={
+                          partnerForm.name
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'name'
+                          )
+                        }
+                        placeholder="Your name"
+                        required
+                      />
+
+                    </label>
+
+
+                    <label>
+
+                      <span>
+                        Phone *
+                      </span>
+
+                      <input
+                        type="tel"
+                        value={
+                          partnerForm.phone
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'phone'
+                          )
+                        }
+                        placeholder="Your phone number"
+                        required
+                      />
+
+                    </label>
+
+
+                    <label>
+
+                      <span>
+                        Email
+                      </span>
+
+                      <input
+                        type="email"
+                        value={
+                          partnerForm.email
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'email'
+                          )
+                        }
+                        placeholder="Your email"
+                      />
+
+                    </label>
+
+
+                    <label>
+
+                      <span>
+                        Moving Date
+                      </span>
+
+                      <input
+                        type="date"
+                        value={
+                          partnerForm.date
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'date'
+                          )
+                        }
+                      />
+
+                    </label>
+
+
+                    <label>
+
+                      <span>
+                        Moving From *
+                      </span>
+
+                      <input
+                        type="text"
+                        value={
+                          partnerForm.from
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'from'
+                          )
+                        }
+                        placeholder="Current location"
+                        required
+                      />
+
+                    </label>
+
+
+                    <label>
+
+                      <span>
+                        Moving To *
+                      </span>
+
+                      <input
+                        type="text"
+                        value={
+                          partnerForm.to
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'to'
+                          )
+                        }
+                        placeholder="Destination"
+                        required
+                      />
+
+                    </label>
+
+
+                    <label className="home-network-form__full">
+
+                      <span>
+                        Service
+                      </span>
+
+                      <select
+                        value={
+                          partnerForm.service
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'service'
+                          )
+                        }
+                      >
+
+                        {selectedPartner.services.map(
+                          (service) => (
+
+                            <option
+                              key={service}
+                              value={service}
+                            >
+                              {service}
+                            </option>
+
+                          )
+                        )}
+
+                      </select>
+
+                    </label>
+
+
+                    <label className="home-network-form__full">
+
+                      <span>
+                        Message
+                      </span>
+
+                      <textarea
+                        rows="3"
+                        value={
+                          partnerForm.message
+                        }
+                        onChange={
+                          updatePartnerForm(
+                            'message'
+                          )
+                        }
+                        placeholder="Tell us about your move..."
+                      />
+
+                    </label>
+
+                  </div>
+
+
+                  <button
+                    type="submit"
+                    className="home-network-form__submit"
+                    disabled={
+                      partnerSending
+                    }
+                  >
+
+                    {partnerSending
+                      ? 'Sending...'
+                      : 'Send Quote Request'}
+
+                    {!partnerSending && (
+                      <IconArrowRight />
+                    )}
+
+                  </button>
+
+                </form>
+
+              </>
+
+            ) : (
+
+              <div className="home-network-modal__success">
+
+                <span>
+                  <IconCheck />
+                </span>
+
+                <h2>
+                  Request Sent!
+                </h2>
+
+                <p>
+                  Thank you. Your quote request
+                  has been submitted successfully.
+                </p>
+
+                <button
+                  type="button"
+                  onClick={closePartnerQuote}
+                >
+                  Done
+                </button>
+
+              </div>
+
+            )}
+
+          </div>
+
+        </div>
+
+      )}
 
     </>
   );
