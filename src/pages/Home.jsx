@@ -29,6 +29,7 @@ import patelLogo from '../assets/network/patel.png';
 import rkLogo from '../assets/network/rk.png';
 import shiftingHubLogo from '../assets/network/shifting hub.png';
 import wellpackLogo from '../assets/network/wellpack.png';
+import eagleInternationalLogo from '../assets/network/eagle.png';
 
 import './Home.css';
 
@@ -278,6 +279,34 @@ const NETWORK_PARTNERS = [
       'Transportation',
     ],
   },
+
+  {
+  id: 'eagle-international',
+
+  name: 'Eagle International Packers & Movers',
+
+  logo: eagleInternationalLogo,
+
+  phone: '',
+
+  phoneAlt: '',
+
+  email: '',
+
+  location:
+    'Mumbai & Maharashtra',
+
+  description:
+    'Professional packing and moving support for safe, reliable and hassle-free relocation across Mumbai and Maharashtra.',
+
+  services: [
+    'Home Shifting',
+    'Office Shifting',
+    'Packing & Moving',
+    'Storage',
+    'Vehicle Transportation',
+  ],
+},
 
 ];
 

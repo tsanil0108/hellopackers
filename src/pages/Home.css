@@ -1514,3 +1514,111 @@
     transition-duration: 0.01ms !important;
   }
 }
+/* =========================================================
+   NETWORK — FORCE ALL 9 PARTNERS TO DISPLAY
+   ========================================================= */
+
+.home-network {
+  position: relative;
+  display: block !important;
+  width: 100%;
+  overflow: visible !important;
+}
+
+.home-network__grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+/* Every partner card must remain visible */
+.home-network__grid > * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  height: auto !important;
+  min-height: 272px;
+  transform: none;
+}
+
+/* Card itself */
+.home-network-card {
+  display: grid !important;
+  grid-template-columns: 172px minmax(0, 1fr) !important;
+  width: 100%;
+  min-height: 272px;
+  height: auto;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Keep reveal animation from hiding the last card */
+.home-network__grid .reveal,
+.home-network__grid [data-reveal] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Eagle / 9th card */
+.home-network__grid > *:nth-child(9) {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .home-network__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+  }
+
+  .home-network-card {
+    grid-template-columns: 145px minmax(0, 1fr) !important;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .home-network__grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .home-network-card {
+    grid-template-columns: 130px minmax(0, 1fr) !important;
+    min-height: 240px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .home-network__grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-network-card {
+    grid-template-columns: 1fr !important;
+    min-height: 0;
+  }
+
+  .home-network-card__logo {
+    min-height: 140px;
+    border-right: 0;
+  }
+}
