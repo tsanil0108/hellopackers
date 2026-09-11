@@ -2,6 +2,7 @@
    HELLO PACKERS — HOME PAGE
    Premium Light Blue / White
    No Horizontal Decorative Lines
+   Sections: Hero, Network (Our Partners), Final CTA
    ========================================================= */
 
 .home {
@@ -57,16 +58,8 @@
 
 .home-hero::before,
 .home-hero::after,
-.home-services::before,
-.home-services::after,
-.home-about::before,
-.home-about::after,
-.home-process::before,
-.home-process::after,
 .home-network::before,
-.home-network::after,
-.home-cities::before,
-.home-cities::after {
+.home-network::after {
   display: none !important;
 }
 
@@ -159,60 +152,8 @@
 }
 
 /* =========================================================
-   COMMON SECTION HEADER
+   COMMON SECTION HEADER (Network section)
    ========================================================= */
-
-.home-section-head {
-  max-width: 760px;
-  margin: 0 auto 54px;
-  text-align: center;
-}
-
-.home-section-head__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  margin-bottom: 15px;
-  color: #1599c8;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.home-section-head__dot {
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
-  border-radius: 50%;
-  background: #29c5f6;
-  box-shadow: 0 0 0 6px rgba(41, 197, 246, 0.1);
-}
-
-.home-section-head h2 {
-  margin: 0 0 15px;
-  color: #10233f;
-  font-family: var(--font-head);
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-}
-
-.home-section-head h2 .text-cyan,
-.home-section-head .text-cyan {
-  color: #16a8d8;
-}
-
-.home-section-head p {
-  max-width: 650px;
-  margin: 0 auto;
-  color: #64758d;
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-/* Actually-used section heading (Services / Process / Network) */
 
 .home-section-heading {
   display: flex;
@@ -517,7 +458,8 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 38%);
 }
 
-.home-hero__image-wrap img {
+.home-hero__image-wrap img,
+.home-hero__video {
   width: 100%;
   height: 420px;
   display: block;
@@ -525,7 +467,8 @@
   transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.home-hero__image-wrap:hover img {
+.home-hero__image-wrap:hover img,
+.home-hero__image-wrap:hover .home-hero__video {
   transform: scale(1.035);
 }
 
@@ -582,367 +525,6 @@
 .home-hero__stats {
   position: relative;
   z-index: 5;
-}
-
-/* =========================================================
-   SERVICES
-   ========================================================= */
-
-.home-services {
-  padding: 80px 0;
-  background: #ffffff;
-}
-
-.home-services__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.home-service-card {
-  position: relative;
-  min-height: 315px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: 23px;
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff 0%,
-      #f5fcff 100%
-    );
-  box-shadow: 0 10px 34px rgba(38, 99, 125, 0.08);
-  transition:
-    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 0.4s ease,
-    background 0.4s ease;
-  color: inherit;
-}
-
-.home-service-card:hover {
-  transform: translateY(-9px);
-  background: #ffffff;
-  box-shadow: 0 22px 48px rgba(29, 103, 135, 0.14);
-}
-
-.home-service-card__number {
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.75);
-  font-family: var(--font-head);
-  font-size: 1.4rem;
-  font-weight: 800;
-}
-
-.home-service-card__media {
-  position: relative;
-  height: 165px;
-  overflow: hidden;
-}
-
-.home-service-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.home-service-card:hover .home-service-card__media img {
-  transform: scale(1.08);
-}
-
-.home-service-card__media-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(16, 35, 63, 0.05), rgba(16, 35, 63, 0.25));
-}
-
-.home-service-card__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 22px 22px 24px;
-}
-
-.home-service-card h3 {
-  margin: 0 0 10px;
-  color: #142a47;
-  font-family: var(--font-head);
-  font-size: 1.1rem;
-  line-height: 1.25;
-}
-
-.home-service-card p {
-  margin: 0;
-  color: #718197;
-  font-size: 0.85rem;
-  line-height: 1.65;
-}
-
-.home-service-card__arrow {
-  margin-top: auto;
-  padding-top: 16px;
-  display: flex;
-  color: #18a7d8;
-  transition: transform 0.3s ease;
-}
-
-.home-service-card:hover .home-service-card__arrow {
-  transform: translateX(5px);
-}
-
-.home-service-card__arrow svg {
-  width: 17px;
-  height: 17px;
-}
-
-/* =========================================================
-   ABOUT
-   ========================================================= */
-
-.home-about {
-  padding: 84px 0;
-  background:
-    radial-gradient(
-      circle at 90% 15%,
-      rgba(41, 197, 246, 0.09),
-      transparent 28%
-    ),
-    #f1faff;
-}
-
-.home-about__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  align-items: center;
-  gap: 72px;
-}
-
-.home-about__media {
-  position: relative;
-}
-
-.home-about__image-wrap {
-  position: relative;
-  overflow: hidden;
-  border-radius: 30px;
-  background: #fff;
-  box-shadow: 0 25px 65px rgba(27, 94, 124, 0.14);
-}
-
-.home-about__image-wrap img {
-  width: 100%;
-  height: 480px;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.8s ease;
-}
-
-.home-about__image-wrap:hover img {
-  transform: scale(1.035);
-}
-
-.home-about__image-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(16, 35, 63, 0.28));
-}
-
-.home-about__badge {
-  position: absolute;
-  right: -25px;
-  bottom: 30px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 190px;
-  padding: 16px 19px;
-  border-radius: 19px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 18px 45px rgba(28, 92, 120, 0.16);
-  backdrop-filter: blur(12px);
-}
-
-.home-about__badge-icon {
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 11px;
-  background: #e4f8ff;
-  color: #119dcc;
-}
-
-.home-about__badge-icon svg {
-  width: 17px;
-  height: 17px;
-}
-
-.home-about__badge strong {
-  display: block;
-  color: #112944;
-  font-family: var(--font-head);
-  font-size: 1.05rem;
-}
-
-.home-about__badge small {
-  color: #728198;
-  font-size: 0.78rem;
-}
-
-.home-about__content {
-  max-width: 590px;
-}
-
-.home-about__intro {
-  margin: 0 0 28px;
-  color: #65768d;
-  font-size: 1rem;
-  line-height: 1.85;
-}
-
-.home-about__points {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 30px;
-}
-
-.home-about__point {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.78);
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease;
-}
-
-.home-about__point:hover {
-  transform: translateY(-3px);
-  background: #ffffff;
-}
-
-.home-about__point-icon {
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: #e4f8ff;
-  color: #139dcb;
-}
-
-.home-about__point-icon svg {
-  width: 19px;
-  height: 19px;
-}
-
-.home-about__point span:last-child {
-  color: #334b67;
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-/* =========================================================
-   PROCESS
-   ========================================================= */
-
-.home-process {
-  padding: 84px 0;
-  background: #ffffff;
-}
-
-.home-process__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.home-process-card {
-  position: relative;
-  min-height: 230px;
-  padding: 30px 25px;
-  border-radius: 24px;
-  background:
-    linear-gradient(
-      145deg,
-      #f9fdff 0%,
-      #eefaff 100%
-    );
-  box-shadow: 0 10px 34px rgba(31, 98, 127, 0.07);
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-.home-process-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(31, 98, 127, 0.12);
-}
-
-.home-process-card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-}
-
-.home-process-card__number {
-  color: #119bc9;
-  font-family: var(--font-head);
-  font-size: 1.8rem;
-  font-weight: 800;
-}
-
-.home-process-card__check {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9px;
-  background: #dff6ff;
-  color: #0d9dcd;
-}
-
-.home-process-card__check svg {
-  width: 14px;
-  height: 14px;
-}
-
-.home-process-card h3 {
-  margin: 0 0 11px;
-  color: #152b47;
-  font-family: var(--font-head);
-  font-size: 1.15rem;
-}
-
-.home-process-card p {
-  margin: 0;
-  color: #718197;
-  font-size: 0.87rem;
-  line-height: 1.7;
-}
-
-.home-process-card__dot {
-  position: absolute;
-  right: 22px;
-  bottom: 22px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #29c5f6;
-  box-shadow: 0 0 0 6px rgba(41, 197, 246, 0.12);
 }
 
 /* =========================================================
@@ -1652,69 +1234,6 @@
 }
 
 /* =========================================================
-   CITIES
-   ========================================================= */
-
-.home-cities {
-  padding: 76px 0;
-  background: #ffffff;
-}
-
-.home-cities__content {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 46px;
-}
-
-.home-cities__content > div {
-  max-width: 620px;
-}
-
-.home-cities__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
-}
-
-.home-city {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 49px;
-  padding: 10px 17px;
-  border-radius: 999px;
-  background: #effaff;
-  color: #35556d;
-  font-size: 0.84rem;
-  font-weight: 700;
-  box-shadow: 0 6px 18px rgba(38, 107, 135, 0.06);
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.home-city:hover {
-  transform: translateY(-4px);
-  background: #e4f8ff;
-  box-shadow: 0 12px 25px rgba(38, 107, 135, 0.1);
-}
-
-.home-city__icon {
-  display: flex;
-  color: #17a4d3;
-}
-
-.home-city__icon svg {
-  width: 17px;
-  height: 17px;
-}
-
-/* =========================================================
    CTA / QUOTE POPUP COMPATIBILITY
    ========================================================= */
 
@@ -1744,20 +1263,9 @@
     font-size: clamp(2.9rem, 6vw, 4.5rem);
   }
 
-  .home-hero__image-wrap img {
+  .home-hero__image-wrap img,
+  .home-hero__video {
     height: 400px;
-  }
-
-  .home-services__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .home-process__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .home-about__grid {
-    gap: 45px;
   }
 
   .home-network-card {
@@ -1821,7 +1329,8 @@
     justify-content: center;
   }
 
-  .home-hero__image-wrap img {
+  .home-hero__image-wrap img,
+  .home-hero__video {
     height: 340px;
   }
 
@@ -1832,11 +1341,7 @@
     padding: 14px;
   }
 
-  .home-services,
-  .home-about,
-  .home-process,
-  .home-network,
-  .home-cities {
+  .home-network {
     padding: 75px 0;
   }
 
@@ -1848,42 +1353,6 @@
 
   .home-section-heading h2 {
     font-size: clamp(2rem, 9vw, 2.8rem);
-  }
-
-  .home-services__grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .home-service-card {
-    min-height: 270px;
-  }
-
-  .home-about__grid {
-    grid-template-columns: 1fr;
-    gap: 42px;
-  }
-
-  .home-about__image-wrap img {
-    height: 380px;
-  }
-
-  .home-about__badge {
-    right: 15px;
-    bottom: 18px;
-  }
-
-  .home-about__content {
-    max-width: 100%;
-  }
-
-  .home-about__points {
-    grid-template-columns: 1fr;
-  }
-
-  .home-process__grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
   }
 
   .home-network__grid {
@@ -1913,17 +1382,6 @@
   .home-network__bottom button {
     width: 100%;
     justify-content: center;
-  }
-
-  .home-cities__content {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .home-city {
-    min-height: 45px;
-    padding: 9px 14px;
-    font-size: 0.78rem;
   }
 }
 
@@ -1965,25 +1423,13 @@
     gap: 10px;
   }
 
-  .home-hero__image-wrap img {
+  .home-hero__image-wrap img,
+  .home-hero__video {
     height: 280px;
   }
 
   .home-hero__floating-card {
     min-width: 165px;
-  }
-
-  .home-service-card {
-    min-height: 250px;
-  }
-
-  .home-about__image-wrap img {
-    height: 300px;
-  }
-
-  .home-about__badge {
-    min-width: 160px;
-    padding: 14px;
   }
 
   .home-network-card {
@@ -2033,15 +1479,6 @@
   .home-network-form__full {
     grid-column: auto;
   }
-
-  .home-cities__list {
-    gap: 9px;
-  }
-
-  .home-city {
-    flex: 1 1 auto;
-    justify-content: center;
-  }
 }
 
 /* =========================================================
@@ -2053,7 +1490,8 @@
     font-size: 2.35rem;
   }
 
-  .home-hero__image-wrap img {
+  .home-hero__image-wrap img,
+  .home-hero__video {
     height: 250px;
   }
 
