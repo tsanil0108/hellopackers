@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import Reveal from '../components/Reveal';
 import PageHero from '../components/PageHero';
@@ -28,6 +27,7 @@ const INITIAL_FORM = {
   email: '',
   from: '',
   to: '',
+  homeSize: '',
   service: '',
   date: '',
   notes: '',
@@ -86,6 +86,7 @@ export default function Contact() {
         `Email: ${form.email}\n` +
         `Moving From: ${form.from}\n` +
         `Moving To: ${form.to}\n` +
+        `Home Size: ${form.homeSize || 'N/A'}\n` +
         `Service Required: ${form.service}\n` +
         `Preferred Date: ${form.date}\n\n` +
         `Additional Details:\n${form.notes || 'N/A'}\n\n` +
@@ -138,9 +139,13 @@ export default function Contact() {
           </>
         }
         primaryCta={
-          <Link to="/contact" className="btn btn-primary">
+          <button
+            type="button"
+            onClick={() => setQuoteOpen(true)}
+            className="btn btn-primary"
+          >
             Get a Quote
-          </Link>
+          </button>
         }
       />
 
@@ -218,43 +223,69 @@ export default function Contact() {
               />
             </label>
 
-            {/* SERVICE */}
+            {/* HOME SIZE + SERVICE */}
 
-            <label>
-              <span>Service Required *</span>
+            <div className="contact-form__row">
+              <label>
+                <span>Home Size (BHK) *</span>
 
-              <select
-                required
-                value={form.service}
-                onChange={update('service')}
-              >
-                <option value="" disabled>
-                  Select a service
-                </option>
+                <select
+                  required
+                  value={form.homeSize}
+                  onChange={update('homeSize')}
+                >
+                  <option value="" disabled>
+                    Select home size
+                  </option>
 
-                <option value="Home Relocation">
-                  Home Relocation
-                </option>
+                  <option value="1 RK">1 RK</option>
+                  <option value="1 BHK">1 BHK</option>
+                  <option value="2 BHK">2 BHK</option>
+                  <option value="3 BHK">3 BHK</option>
+                  <option value="4+ BHK">4+ BHK</option>
+                  <option value="Office / Commercial">
+                    Office / Commercial
+                  </option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
 
-                <option value="Office Relocation">
-                  Office Relocation
-                </option>
+              <label>
+                <span>Service Required *</span>
 
-                <option value="Vehicle Transportation">
-                  Vehicle Transportation
-                </option>
+                <select
+                  required
+                  value={form.service}
+                  onChange={update('service')}
+                >
+                  <option value="" disabled>
+                    Select a service
+                  </option>
 
-                <option value="Packing & Unpacking">
-                  Packing &amp; Unpacking
-                </option>
+                  <option value="Home Relocation">
+                    Home Relocation
+                  </option>
 
-                <option value="Storage & Warehousing">
-                  Storage &amp; Warehousing
-                </option>
+                  <option value="Office Relocation">
+                    Office Relocation
+                  </option>
 
-                <option value="Other">Other</option>
-              </select>
-            </label>
+                  <option value="Vehicle Transportation">
+                    Vehicle Transportation
+                  </option>
+
+                  <option value="Packing & Unpacking">
+                    Packing &amp; Unpacking
+                  </option>
+
+                  <option value="Storage & Warehousing">
+                    Storage &amp; Warehousing
+                  </option>
+
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+            </div>
 
             {/* FROM + TO */}
 
@@ -419,13 +450,14 @@ export default function Contact() {
               <div className="contact-info-card__bottom">
                 <span>Need an instant quote?</span>
 
-                <Link
-                  to="/contact"
+                <button
+                  type="button"
+                  onClick={() => setQuoteOpen(true)}
                   className="contact-info-card__link"
                 >
                   Get Started
                   <IconArrowRight />
-                </Link>
+                </button>
               </div>
             </div>
 

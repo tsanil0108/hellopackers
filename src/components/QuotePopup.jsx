@@ -14,6 +14,7 @@ const INITIAL_FORM = {
   email: '',
   from: '',
   to: '',
+  homeSize: '',
   service: '',
   date: '',
   notes: ''
@@ -94,6 +95,7 @@ export default function QuotePopup({ isOpen, onClose }) {
       `Email: ${form.email}\n` +
       `Moving From: ${form.from}\n` +
       `Moving To: ${form.to}\n` +
+      `Home Size: ${form.homeSize || 'N/A'}\n` +
       `Service Required: ${form.service}\n` +
       `Preferred Date: ${form.date}\n\n` +
       `Additional Details:\n${form.notes || 'N/A'}\n\n` +
@@ -307,6 +309,56 @@ export default function QuotePopup({ isOpen, onClose }) {
 
                 <div className="quote-popup__field">
 
+                  <label htmlFor="quote-home-size">
+                    Home Size (BHK) *
+                  </label>
+
+                  <select
+                    id="quote-home-size"
+                    value={form.homeSize}
+                    onChange={update('homeSize')}
+                    required
+                  >
+
+                    <option value="" disabled>
+                      Select home size
+                    </option>
+
+                    <option value="1 RK">
+                      1 RK
+                    </option>
+
+                    <option value="1 BHK">
+                      1 BHK
+                    </option>
+
+                    <option value="2 BHK">
+                      2 BHK
+                    </option>
+
+                    <option value="3 BHK">
+                      3 BHK
+                    </option>
+
+                    <option value="4+ BHK">
+                      4+ BHK
+                    </option>
+
+                    <option value="Office / Commercial">
+                      Office / Commercial
+                    </option>
+
+                    <option value="Other">
+                      Other
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div className="quote-popup__field">
+
                   <label htmlFor="quote-service">
                     Service Required *
                   </label>
@@ -350,24 +402,25 @@ export default function QuotePopup({ isOpen, onClose }) {
 
                 </div>
 
+              </div>
 
-                <div className="quote-popup__field">
 
-                  <label htmlFor="quote-date">
-                    Moving Date *
-                  </label>
+              <div className="quote-popup__field">
 
-                  <input
-                    id="quote-date"
-                    type="date"
-                    value={form.date}
-                    onChange={update('date')}
-                    required
-                  />
+                <label htmlFor="quote-date">
+                  Moving Date *
+                </label>
 
-                </div>
+                <input
+                  id="quote-date"
+                  type="date"
+                  value={form.date}
+                  onChange={update('date')}
+                  required
+                />
 
               </div>
+
 
 
               <div className="quote-popup__field">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Reveal from '../components/Reveal';
@@ -400,6 +400,32 @@ export default function Home() {
   const openQuote = () => {
     setQuoteOpen(true);
   };
+
+
+  useEffect(() => {
+
+    const alreadyShown = sessionStorage.getItem(
+      'hp_quote_auto_shown'
+    );
+
+    if (alreadyShown) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+
+      setQuoteOpen(true);
+
+      sessionStorage.setItem(
+        'hp_quote_auto_shown',
+        'true'
+      );
+
+    }, 3000);
+
+    return () => clearTimeout(timer);
+
+  }, []);
 
 
   const closeQuote = () => {

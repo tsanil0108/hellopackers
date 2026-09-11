@@ -1,43 +1,218 @@
-.whatsapp-fab {
+.quick-fab {
   position: fixed;
   right: 22px;
   bottom: 22px;
+  z-index: 90;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.quick-fab__btn {
+  position: relative;
+
   width: 58px;
   height: 58px;
+
   border-radius: 50%;
-  background: #25D366;
-  color: #fff;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 28px -8px rgba(37,211,102,0.65);
-  z-index: 90;
+
+  color: #fff;
+
   transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 
-.whatsapp-fab:hover {
+.quick-fab__btn:hover {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 14px 32px -8px rgba(37,211,102,0.8);
 }
 
-.whatsapp-fab__ping {
+.quick-fab__btn svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+.quick-fab__btn--whatsapp {
+  background: #25D366;
+  box-shadow: 0 10px 28px -8px rgba(37, 211, 102, 0.65);
+  animation: quick-fab-bounce 6s ease-in-out infinite;
+}
+
+.quick-fab__btn--whatsapp:hover {
+  box-shadow: 0 14px 32px -8px rgba(37, 211, 102, 0.8);
+  animation-play-state: paused;
+}
+
+@keyframes quick-fab-bounce {
+  0%, 78%, 100% { transform: translateY(0) scale(1); }
+  83% { transform: translateY(-7px) scale(1.06); }
+  88% { transform: translateY(0) scale(0.97); }
+  93% { transform: translateY(-3px) scale(1.02); }
+}
+
+.quick-fab__ping {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: #25D366;
   opacity: 0.55;
-  animation: whatsapp-ping 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: quick-fab-ping 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-@keyframes whatsapp-ping {
+@keyframes quick-fab-ping {
   0% { transform: scale(1); opacity: 0.55; }
   100% { transform: scale(1.9); opacity: 0; }
 }
 
+/* =========================================================
+   AUTO-POPPING BUBBLE (whatsapp)
+========================================================= */
+
+.quick-fab__auto-bubble {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+
+  white-space: nowrap;
+
+  background: #fff;
+  color: var(--ink-900, #0b1220);
+
+  padding: 9px 14px;
+
+  border-radius: 20px 20px 4px 20px;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  box-shadow: 0 10px 24px -8px rgba(11, 18, 32, 0.35);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transform: translateY(-50%) scale(0.85);
+  transform-origin: right center;
+
+  animation: quick-fab-bubble-pop 6s ease-in-out infinite;
+}
+
+@keyframes quick-fab-bubble-pop {
+  0%, 55% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.85);
+  }
+  62% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05);
+  }
+  68% {
+    transform: translateY(-50%) scale(1);
+  }
+  88% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  96%, 100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.85);
+  }
+}
+
+.quick-fab__btn--whatsapp:hover .quick-fab__auto-bubble {
+  opacity: 0;
+  animation-play-state: paused;
+}
+
+/* =========================================================
+   CALL
+========================================================= */
+
+.quick-fab__btn--call {
+  width: 50px;
+  height: 50px;
+
+  background: var(--ink-900, #0b1220);
+  box-shadow: 0 10px 24px -8px rgba(11, 18, 32, 0.55);
+}
+
+.quick-fab__btn--call:hover {
+  background: var(--cyan-500, #29c5f6);
+  box-shadow: 0 12px 28px -8px rgba(41, 197, 246, 0.55);
+}
+
+/* =========================================================
+   TOOLTIP
+========================================================= */
+
+.quick-fab__tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+
+  white-space: nowrap;
+
+  background: var(--ink-900, #0b1220);
+  color: #fff;
+
+  padding: 7px 12px;
+
+  border-radius: 8px;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.quick-fab__btn:hover .quick-fab__tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .whatsapp-fab__ping { animation: none; display: none; }
+  .quick-fab__ping { animation: none; display: none; }
+  .quick-fab__btn--whatsapp { animation: none; }
+  .quick-fab__auto-bubble { animation: none; opacity: 0; }
 }
 
 @media (max-width: 600px) {
-  .whatsapp-fab { right: 16px; bottom: 16px; width: 52px; height: 52px; }
+
+  .quick-fab {
+    right: 16px;
+    bottom: 16px;
+    gap: 12px;
+  }
+
+  .quick-fab__btn--whatsapp {
+    width: 52px;
+    height: 52px;
+  }
+
+  .quick-fab__btn--call {
+    width: 46px;
+    height: 46px;
+  }
+
+  .quick-fab__tooltip {
+    display: none;
+  }
+
+  .quick-fab__auto-bubble {
+    max-width: 46vw;
+    white-space: normal;
+    font-size: 0.76rem;
+  }
+
 }
