@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+
 import {
   IconCheck,
-  IconArrowRight
+  IconArrowRight,
 } from './Icons';
 
-import { CONTACT } from '../siteData';
-
 import './QuotePopup.css';
+
+const WEB3FORMS_ACCESS_KEY =
+  '0efe13bf-a643-4c7f-b388-a413f64e3430';
 
 const INITIAL_FORM = {
   name: '',
@@ -17,23 +19,29 @@ const INITIAL_FORM = {
   homeSize: '',
   service: '',
   date: '',
-  notes: ''
 };
 
-export default function QuotePopup({ isOpen, onClose }) {
-
+export default function QuotePopup({
+  isOpen,
+  onClose,
+}) {
   const [form, setForm] = useState(INITIAL_FORM);
   const [sent, setSent] = useState(false);
-
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-
     if (!isOpen) {
-      document.body.classList.remove('quote-popup-open');
+      document.body.classList.remove(
+        'quote-popup-open'
+      );
+
       return;
     }
 
-    document.body.classList.add('quote-popup-open');
+    document.body.classList.add(
+      'quote-popup-open'
+    );
 
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
@@ -56,64 +64,114 @@ export default function QuotePopup({ isOpen, onClose }) {
         handleEscape
       );
     };
-
   }, [isOpen]);
 
-
   const update = (field) => (event) => {
-
     setForm((current) => ({
       ...current,
-      [field]: event.target.value
+      [field]: event.target.value,
     }));
 
+    if (error) {
+      setError('');
+    }
   };
-
 
   const handleClose = () => {
-
     setForm(INITIAL_FORM);
     setSent(false);
+    setSending(false);
+    setError('');
 
     onClose();
-
   };
 
-
-  const handleSubmit = (event) => {
-
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const subject = encodeURIComponent(
-      `Quote Request — ${form.name || 'New Enquiry'}`
-    );
+    if (sending) {
+      return;
+    }
 
-    const body = encodeURIComponent(
-      `HELLO PACKERS — QUOTE REQUEST\n\n` +
-      `Name: ${form.name}\n` +
-      `Phone: ${form.phone}\n` +
-      `Email: ${form.email}\n` +
-      `Moving From: ${form.from}\n` +
-      `Moving To: ${form.to}\n` +
-      `Home Size: ${form.homeSize || 'N/A'}\n` +
-      `Service Required: ${form.service}\n` +
-      `Preferred Date: ${form.date}\n\n` +
-      `Additional Details:\n${form.notes || 'N/A'}\n\n` +
-      `Sent from Hello Packers website.`
-    );
+    setSending(true);
+    setSent(false);
+    setError('');
 
-    window.location.href =
-      `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch(
+        'https://api.web3forms.com/submit',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key:
+              WEB3FORMS_ACCESS_KEY,
 
-    setSent(true);
+            subject: `New Quote Request — ${
+              form.name || 'New Enquiry'
+            }`,
 
+            from_name:
+              'Hello Packers Website',
+
+            replyto: form.email,
+
+            name: form.name,
+            phone: form.phone,
+            email: form.email,
+
+            'Moving From': form.from,
+            'Moving To': form.to,
+            'Home Size': form.homeSize,
+            'Service Required': form.service,
+            'Preferred Moving Date': form.date,
+
+            message:
+              `New Hello Packers Quote Request\n\n` +
+              `Name: ${form.name}\n` +
+              `Phone: ${form.phone}\n` +
+              `Email: ${form.email}\n` +
+              `Moving From: ${form.from}\n` +
+              `Moving To: ${form.to}\n` +
+              `Home Size: ${form.homeSize}\n` +
+              `Service Required: ${form.service}\n` +
+              `Preferred Moving Date: ${form.date}\n\n` +
+              `Submitted from Hello Packers website.`,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ||
+            'Unable to send your request right now.'
+        );
+      }
+
+      setSent(true);
+      setForm(INITIAL_FORM);
+    } catch (submitError) {
+      console.error(
+        'Web3Forms submission error:',
+        submitError
+      );
+
+      setError(
+        'Sorry, your request could not be sent. Please try again.'
+      );
+    } finally {
+      setSending(false);
+    }
   };
-
 
   if (!isOpen) {
     return null;
   }
-
 
   return (
     <div
@@ -121,20 +179,16 @@ export default function QuotePopup({ isOpen, onClose }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="quote-popup-title"
-
       onMouseDown={(event) => {
-
         if (
-          event.target === event.currentTarget
+          event.target ===
+          event.currentTarget
         ) {
           handleClose();
         }
-
       }}
     >
-
       <div className="quote-popup__card">
-
 
         {/* CLOSE */}
 
@@ -147,15 +201,11 @@ export default function QuotePopup({ isOpen, onClose }) {
           <span>×</span>
         </button>
 
-
         {!sent ? (
-
           <>
-
             {/* HEADER */}
 
             <div className="quote-popup__header">
-
               <span className="quote-popup__eyebrow">
                 FREE QUOTE
               </span>
@@ -165,17 +215,15 @@ export default function QuotePopup({ isOpen, onClose }) {
               </h2>
 
               <p>
-                Fill in your moving details and our team
-                will get back to you with the best quote.
+                Fill in your moving details and our
+                team will get back to you with the
+                best quote.
               </p>
-
             </div>
-
 
             {/* BENEFITS */}
 
             <div className="quote-popup__benefits">
-
               <span>
                 <IconCheck />
                 Free Consultation
@@ -190,9 +238,7 @@ export default function QuotePopup({ isOpen, onClose }) {
                 <IconCheck />
                 Quick Response
               </span>
-
             </div>
-
 
             {/* FORM */}
 
@@ -200,11 +246,10 @@ export default function QuotePopup({ isOpen, onClose }) {
               className="quote-popup__form"
               onSubmit={handleSubmit}
             >
+              {/* NAME + PHONE */}
 
               <div className="quote-popup__row">
-
                 <div className="quote-popup__field">
-
                   <label htmlFor="quote-name">
                     Full Name *
                   </label>
@@ -218,12 +263,9 @@ export default function QuotePopup({ isOpen, onClose }) {
                     autoComplete="name"
                     required
                   />
-
                 </div>
 
-
                 <div className="quote-popup__field">
-
                   <label htmlFor="quote-phone">
                     Phone Number *
                   </label>
@@ -240,14 +282,12 @@ export default function QuotePopup({ isOpen, onClose }) {
                     maxLength="10"
                     required
                   />
-
                 </div>
-
               </div>
 
+              {/* EMAIL */}
 
               <div className="quote-popup__field">
-
                 <label htmlFor="quote-email">
                   Email Address *
                 </label>
@@ -261,14 +301,12 @@ export default function QuotePopup({ isOpen, onClose }) {
                   autoComplete="email"
                   required
                 />
-
               </div>
 
+              {/* FROM + TO */}
 
               <div className="quote-popup__row">
-
                 <div className="quote-popup__field">
-
                   <label htmlFor="quote-from">
                     Moving From *
                   </label>
@@ -281,12 +319,9 @@ export default function QuotePopup({ isOpen, onClose }) {
                     placeholder="Current location"
                     required
                   />
-
                 </div>
 
-
                 <div className="quote-popup__field">
-
                   <label htmlFor="quote-to">
                     Moving To *
                   </label>
@@ -299,16 +334,13 @@ export default function QuotePopup({ isOpen, onClose }) {
                     placeholder="Destination"
                     required
                   />
-
                 </div>
-
               </div>
 
+              {/* HOME SIZE + SERVICE */}
 
               <div className="quote-popup__row">
-
                 <div className="quote-popup__field">
-
                   <label htmlFor="quote-home-size">
                     Home Size (BHK) *
                   </label>
@@ -319,8 +351,10 @@ export default function QuotePopup({ isOpen, onClose }) {
                     onChange={update('homeSize')}
                     required
                   >
-
-                    <option value="" disabled>
+                    <option
+                      value=""
+                      disabled
+                    >
                       Select home size
                     </option>
 
@@ -351,14 +385,10 @@ export default function QuotePopup({ isOpen, onClose }) {
                     <option value="Other">
                       Other
                     </option>
-
                   </select>
-
                 </div>
 
-
                 <div className="quote-popup__field">
-
                   <label htmlFor="quote-service">
                     Service Required *
                   </label>
@@ -369,8 +399,10 @@ export default function QuotePopup({ isOpen, onClose }) {
                     onChange={update('service')}
                     required
                   >
-
-                    <option value="" disabled>
+                    <option
+                      value=""
+                      disabled
+                    >
                       Select a service
                     </option>
 
@@ -397,16 +429,13 @@ export default function QuotePopup({ isOpen, onClose }) {
                     <option value="Other">
                       Other
                     </option>
-
                   </select>
-
                 </div>
-
               </div>
 
+              {/* MOVING DATE */}
 
               <div className="quote-popup__field">
-
                 <label htmlFor="quote-date">
                   Moving Date *
                 </label>
@@ -418,56 +447,44 @@ export default function QuotePopup({ isOpen, onClose }) {
                   onChange={update('date')}
                   required
                 />
-
               </div>
 
+              {/* ERROR */}
 
+              {error && (
+                <div
+                  className="quote-popup__error"
+                  role="alert"
+                >
+                  {error}
+                </div>
+              )}
 
-              <div className="quote-popup__field">
-
-                <label htmlFor="quote-notes">
-
-                  Additional Details
-
-                  <span>
-                    Optional
-                  </span>
-
-                </label>
-
-                <textarea
-                  id="quote-notes"
-                  value={form.notes}
-                  onChange={update('notes')}
-                  rows="3"
-                  placeholder="Home size, floor, lift access, vehicle, storage requirements..."
-                />
-
-              </div>
-
+              {/* SUBMIT */}
 
               <button
                 type="submit"
                 className="quote-popup__submit"
+                disabled={sending}
+                aria-busy={sending}
               >
-                Send Quote Request
-                <IconArrowRight />
-              </button>
+                {sending
+                  ? 'Sending Request...'
+                  : 'Send Quote Request'}
 
+                {!sending && <IconArrowRight />}
+              </button>
 
               <p className="quote-popup__privacy">
                 Your details are used only to respond
                 to your enquiry.
               </p>
-
             </form>
-
           </>
-
         ) : (
+          /* SUCCESS */
 
           <div className="quote-popup__success">
-
             <div className="quote-popup__success-icon">
               <IconCheck />
             </div>
@@ -477,13 +494,13 @@ export default function QuotePopup({ isOpen, onClose }) {
             </span>
 
             <h2>
-              Thank You!
+              Thank You! 🎉
             </h2>
 
             <p>
-              Your email app should now open with your
-              quote details filled in. Please press
-              Send to complete your enquiry.
+              Your quote request has been sent
+              successfully. Our team will contact
+              you shortly.
             </p>
 
             <button
@@ -494,13 +511,9 @@ export default function QuotePopup({ isOpen, onClose }) {
               Done
               <IconArrowRight />
             </button>
-
           </div>
-
         )}
-
       </div>
-
     </div>
   );
 }

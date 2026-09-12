@@ -21,6 +21,9 @@ import { CONTACT } from '../siteData';
 
 import './Contact.css';
 
+const WEB3FORMS_ACCESS_KEY =
+  '0efe13bf-a643-4c7f-b388-a413f64e3430';
+
 const INITIAL_FORM = {
   name: '',
   phone: '',
@@ -30,7 +33,6 @@ const INITIAL_FORM = {
   homeSize: '',
   service: '',
   date: '',
-  notes: '',
 };
 
 const WHY_US = [
@@ -59,6 +61,8 @@ const WHY_US = [
 export default function Contact() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [quoteOpen, setQuoteOpen] = useState(false);
 
   const update = (field) => (event) => {
@@ -70,33 +74,91 @@ export default function Contact() {
     if (sent) {
       setSent(false);
     }
+
+    if (error) {
+      setError('');
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const subject = encodeURIComponent(
-      `Quote Request — ${form.name || 'New Enquiry'}`
-    );
+    if (sending) {
+      return;
+    }
 
-    const body = encodeURIComponent(
-      `HELLO PACKERS — QUOTE REQUEST\n\n` +
-        `Name: ${form.name}\n` +
-        `Phone: ${form.phone}\n` +
-        `Email: ${form.email}\n` +
-        `Moving From: ${form.from}\n` +
-        `Moving To: ${form.to}\n` +
-        `Home Size: ${form.homeSize || 'N/A'}\n` +
-        `Service Required: ${form.service}\n` +
-        `Preferred Date: ${form.date}\n\n` +
-        `Additional Details:\n${form.notes || 'N/A'}\n\n` +
-        `Sent from Hello Packers website.`
-    );
+    setSending(true);
+    setSent(false);
+    setError('');
 
-    window.location.href =
-      `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch(
+        'https://api.web3forms.com/submit',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_ACCESS_KEY,
 
-    setSent(true);
+            subject: `New Quote Request — ${
+              form.name || 'New Enquiry'
+            }`,
+
+            from_name: 'Hello Packers Website',
+
+            replyto: form.email,
+
+            name: form.name,
+            phone: form.phone,
+            email: form.email,
+
+            'Moving From': form.from,
+            'Moving To': form.to,
+            'Home Size': form.homeSize,
+            'Service Required': form.service,
+            'Preferred Moving Date': form.date,
+
+            message:
+              `New Hello Packers Quote Request\n\n` +
+              `Name: ${form.name}\n` +
+              `Phone: ${form.phone}\n` +
+              `Email: ${form.email}\n` +
+              `Moving From: ${form.from}\n` +
+              `Moving To: ${form.to}\n` +
+              `Home Size: ${form.homeSize}\n` +
+              `Service Required: ${form.service}\n` +
+              `Preferred Moving Date: ${form.date}\n\n` +
+              `Submitted from Hello Packers website.`,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ||
+            'Unable to send your request right now.'
+        );
+      }
+
+      setSent(true);
+      setForm(INITIAL_FORM);
+    } catch (submitError) {
+      console.error(
+        'Web3Forms submission error:',
+        submitError
+      );
+
+      setError(
+        'Sorry, your request could not be sent. Please try again.'
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -155,6 +217,7 @@ export default function Contact() {
 
       <section className="section contact-section">
         <div className="container contact-layout">
+
           {/* =================================================
               CONTACT FORM
           ================================================= */}
@@ -164,15 +227,21 @@ export default function Contact() {
             className="contact-form"
             onSubmit={handleSubmit}
           >
-            <span className="eyebrow">Send Us a Message</span>
+            <span className="eyebrow">
+              Send Us a Message
+            </span>
 
             <h2>
-              Request a Free <span className="text-cyan-dark">Quote</span>
+              Request a Free{' '}
+              <span className="text-cyan-dark">
+                Quote
+              </span>
             </h2>
 
             <p className="contact-form__intro">
-              Fill in the details below and our team will get back to you
-              shortly with the best solution for your move.
+              Fill in the details below and our team
+              will get back to you shortly with the best
+              solution for your move.
             </p>
 
             {/* NAME + PHONE */}
@@ -238,15 +307,33 @@ export default function Contact() {
                     Select home size
                   </option>
 
-                  <option value="1 RK">1 RK</option>
-                  <option value="1 BHK">1 BHK</option>
-                  <option value="2 BHK">2 BHK</option>
-                  <option value="3 BHK">3 BHK</option>
-                  <option value="4+ BHK">4+ BHK</option>
+                  <option value="1 RK">
+                    1 RK
+                  </option>
+
+                  <option value="1 BHK">
+                    1 BHK
+                  </option>
+
+                  <option value="2 BHK">
+                    2 BHK
+                  </option>
+
+                  <option value="3 BHK">
+                    3 BHK
+                  </option>
+
+                  <option value="4+ BHK">
+                    4+ BHK
+                  </option>
+
                   <option value="Office / Commercial">
                     Office / Commercial
                   </option>
-                  <option value="Other">Other</option>
+
+                  <option value="Other">
+                    Other
+                  </option>
                 </select>
               </label>
 
@@ -282,7 +369,9 @@ export default function Contact() {
                     Storage &amp; Warehousing
                   </option>
 
-                  <option value="Other">Other</option>
+                  <option value="Other">
+                    Other
+                  </option>
                 </select>
               </label>
             </div>
@@ -328,37 +417,50 @@ export default function Contact() {
               />
             </label>
 
-            {/* NOTES */}
-
-            <label>
-              <span>
-                Additional Message
-                <small> Optional</small>
-              </span>
-
-              <textarea
-                rows="4"
-                value={form.notes}
-                onChange={update('notes')}
-                placeholder="Home size, vehicle to move, storage needs, floor and lift access..."
-              />
-            </label>
-
             {/* SUBMIT */}
 
             <button
               type="submit"
               className="btn btn-primary contact-form__submit"
+              disabled={sending}
+              aria-busy={sending}
             >
-              Send Request
-              <IconArrowRight />
+              {sending
+                ? 'Sending Request...'
+                : 'Send Request'}
+
+              {!sending && <IconArrowRight />}
             </button>
 
+            {/* SUCCESS MESSAGE */}
+
             {sent && (
-              <p className="contact-form__sent">
-                Your email app should now open with the details filled in.
-                Please press Send to complete your enquiry.
-              </p>
+              <div
+                className="contact-form__sent"
+                role="status"
+                aria-live="polite"
+              >
+                <strong>
+                  Thank You! 🎉
+                </strong>
+
+                <span>
+                  Your request has been sent
+                  successfully. Our team will contact
+                  you shortly.
+                </span>
+              </div>
+            )}
+
+            {/* ERROR MESSAGE */}
+
+            {error && (
+              <div
+                className="contact-form__error"
+                role="alert"
+              >
+                {error}
+              </div>
             )}
           </Reveal>
 
@@ -376,16 +478,21 @@ export default function Contact() {
 
             <div className="contact-info-card">
               <div className="contact-info-card__header">
-                <span className="eyebrow">Contact Information</span>
+                <span className="eyebrow">
+                  Contact Information
+                </span>
 
                 <h3>
                   Let's Talk About Your{' '}
-                  <span className="text-cyan-dark">Move</span>
+                  <span className="text-cyan-dark">
+                    Move
+                  </span>
                 </h3>
 
                 <p>
-                  Our team is ready to answer your questions and help plan
-                  your relocation.
+                  Our team is ready to answer your
+                  questions and help plan your
+                  relocation.
                 </p>
               </div>
 
@@ -398,7 +505,9 @@ export default function Contact() {
                   <div>
                     <h4>Call Us</h4>
 
-                    <a href={`tel:${CONTACT.phone}`}>
+                    <a
+                      href={`tel:${CONTACT.phone}`}
+                    >
                       {CONTACT.phoneDisplay}
                     </a>
                   </div>
@@ -412,7 +521,9 @@ export default function Contact() {
                   <div>
                     <h4>Email Us</h4>
 
-                    <a href={`mailto:${CONTACT.email}`}>
+                    <a
+                      href={`mailto:${CONTACT.email}`}
+                    >
                       {CONTACT.email}
                     </a>
                   </div>
@@ -448,7 +559,9 @@ export default function Contact() {
               </ul>
 
               <div className="contact-info-card__bottom">
-                <span>Need an instant quote?</span>
+                <span>
+                  Need an instant quote?
+                </span>
 
                 <button
                   type="button"
@@ -475,12 +588,14 @@ export default function Contact() {
 
                 <h3>
                   Need Help With Your{' '}
-                  <span className="text-cyan-dark">Move?</span>
+                  <span className="text-cyan-dark">
+                    Move?
+                  </span>
                 </h3>
 
                 <p>
-                  Talk to our team and get guidance for your relocation
-                  requirements.
+                  Talk to our team and get guidance
+                  for your relocation requirements.
                 </p>
 
                 <div className="contact-action-card__buttons">
@@ -513,15 +628,21 @@ export default function Contact() {
       <section className="section section--raised contact-why">
         <div className="container">
           <div className="services-head contact-why__head">
-            <span className="eyebrow">Why Get in Touch</span>
+            <span className="eyebrow">
+              Why Get in Touch
+            </span>
 
             <h2>
-              Why Get in Touch With <span className="text-cyan-dark">Us?</span>
+              Why Get in Touch With{' '}
+              <span className="text-cyan-dark">
+                Us?
+              </span>
             </h2>
 
             <p>
-              From your first enquiry to the final delivery, our team is
-              focused on making your move simple and stress-free.
+              From your first enquiry to the final
+              delivery, our team is focused on making
+              your move simple and stress-free.
             </p>
           </div>
 

@@ -1,6 +1,19 @@
+/* =========================================================
+   HELLO PACKERS
+   PREMIUM STICKY NAVBAR
+   Navbar + Ticker stay fixed while scrolling
+========================================================= */
+
+
+/* =========================================================
+   MAIN NAVBAR
+========================================================= */
+
 .navbar {
   position: sticky;
+
   top: 0;
+
   z-index: 1000;
 
   width: 100%;
@@ -8,9 +21,13 @@
   background:
     linear-gradient(
       180deg,
-      #0a1834 0%,
-      #07152e 100%
+      #15345f 0%,
+      #102b52 100%
     );
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.10);
 
   transition:
     background 0.3s ease,
@@ -18,48 +35,67 @@
     backdrop-filter 0.3s ease;
 }
 
+
+/* =========================================================
+   SCROLLED NAVBAR
+========================================================= */
+
 .navbar--scrolled {
   background:
-    rgba(7, 18, 48, 0.94);
+    rgba(12, 36, 72, 0.97);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter:
+    blur(18px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter:
+    blur(18px);
 
   box-shadow:
-    0 12px 35px
-    rgba(0, 0, 0, 0.18);
+    0 10px 35px
+    rgba(0, 0, 0, 0.20);
 }
 
+
+/* =========================================================
+   CYAN BOTTOM GLOW
+========================================================= */
 
 .navbar__glow {
   position: absolute;
 
   left: 0;
   right: 0;
-  bottom: 0;
+
+  bottom: 37px;
 
   height: 2px;
 
   pointer-events: none;
 
+  z-index: 10;
+
   background:
     linear-gradient(
       90deg,
       transparent,
-      rgba(41, 197, 246, 0.75),
-      rgba(41, 197, 246, 0.9),
+      rgba(89, 220, 255, 0.35),
+      rgba(89, 220, 255, 0.95),
+      rgba(89, 220, 255, 0.35),
       transparent
     );
 
-  opacity: 0.5;
+  opacity: 0.85;
 }
 
+
+/* =========================================================
+   NAVBAR INNER
+========================================================= */
 
 .navbar__inner {
   position: relative;
 
-  min-height: 74px;
+  min-height: 82px;
 
   display: flex;
 
@@ -67,30 +103,45 @@
 
   justify-content: space-between;
 
-  gap: 25px;
+  gap: 28px;
 }
 
+
+/* =========================================================
+   BRAND
+========================================================= */
 
 .navbar__brand {
   display: inline-flex;
 
   align-items: center;
 
-  gap: 11px;
+  gap: 13px;
 
   flex-shrink: 0;
+
+  min-width: 0;
 
   text-decoration: none;
 }
 
 
+/* =========================================================
+   LOGO
+========================================================= */
+
 .navbar__logo {
   width: auto;
-  height: 52px;
+
+  height: 64px;
+
+  max-width: 180px;
 
   object-fit: contain;
 
-  border-radius: 10px;
+  border-radius: 12px;
+
+  flex-shrink: 0;
 
   transition:
     transform 0.3s ease,
@@ -102,37 +153,50 @@
 .navbar__logo {
   transform:
     translateY(-2px)
-    scale(1.03);
+    scale(1.035);
 
   filter:
     drop-shadow(
-      0 5px 14px
-      rgba(41, 197, 246, 0.25)
+      0 7px 17px
+      rgba(76, 216, 255, 0.30)
     );
 }
 
 
+/* =========================================================
+   WORDMARK
+========================================================= */
+
 .navbar__wordmark {
+  display: inline-block;
+
   color: #ffffff;
 
-  font-family: var(--font-head);
+  font-family:
+    var(--font-head);
 
-  font-size: 1.05rem;
+  font-size: 1.08rem;
 
-  font-weight: 750;
+  font-weight: 800;
 
-  letter-spacing: 0.015em;
+  letter-spacing: 0.02em;
+
+  line-height: 1;
 
   white-space: nowrap;
 }
 
 
 .navbar__wordmark em {
-  color: var(--cyan-400);
+  color: #62ddff;
 
   font-style: normal;
 }
 
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 .navbar__links {
   flex: 1;
@@ -143,9 +207,13 @@
 
   justify-content: flex-end;
 
-  gap: 40px;
+  gap: 38px;
 }
 
+
+/* =========================================================
+   MENU
+========================================================= */
 
 .navbar__menu {
   display: flex;
@@ -154,9 +222,13 @@
 
   justify-content: center;
 
-  gap: 32px;
+  gap: 30px;
 }
 
+
+/* =========================================================
+   LINKS
+========================================================= */
 
 .navbar__link {
   position: relative;
@@ -165,14 +237,15 @@
 
   align-items: center;
 
-  padding: 8px 2px;
+  padding:
+    9px 2px;
 
   color:
-    rgba(255, 255, 255, 0.76);
+    rgba(255, 255, 255, 0.88);
 
   font-size: 0.94rem;
 
-  font-weight: 500;
+  font-weight: 550;
 
   text-decoration: none;
 
@@ -185,7 +258,8 @@
 .navbar__link:hover {
   color: #ffffff;
 
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 }
 
 
@@ -195,9 +269,10 @@
   position: absolute;
 
   left: 0;
+
   right: 100%;
 
-  bottom: -3px;
+  bottom: -4px;
 
   height: 2px;
 
@@ -206,8 +281,8 @@
   background:
     linear-gradient(
       90deg,
-      var(--cyan-400),
-      var(--cyan-500)
+      #67e2ff,
+      #29c5f6
     );
 
   transition:
@@ -230,16 +305,24 @@
 }
 
 
+/* =========================================================
+   ACTIONS
+========================================================= */
+
 .navbar__actions {
   display: flex;
 
   align-items: center;
 
-  gap: 22px;
+  gap: 20px;
 
   flex-shrink: 0;
 }
 
+
+/* =========================================================
+   PHONE
+========================================================= */
 
 .navbar__phone {
   display: inline-flex;
@@ -248,11 +331,11 @@
 
   gap: 9px;
 
-  color: var(--cyan-400);
+  color: #62ddff;
 
   font-size: 0.9rem;
 
-  font-weight: 650;
+  font-weight: 700;
 
   white-space: nowrap;
 
@@ -265,29 +348,36 @@
 
 
 .navbar__phone:hover {
-  color: #8fe6ff;
+  color: #b4f2ff;
 
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 }
 
 
 .navbar__phone-ring {
   position: relative;
 
-  width: 31px;
-  height: 31px;
+  width: 32px;
+
+  height: 32px;
 
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
   background:
-    rgba(41, 197, 246, 0.13);
+    rgba(89, 218, 255, 0.13);
 
-  color: var(--cyan-400);
+  border:
+    1px solid
+    rgba(89, 218, 255, 0.20);
+
+  color: #62ddff;
 }
 
 
@@ -302,7 +392,7 @@
 
   border:
     1px solid
-    rgba(41, 197, 246, 0.35);
+    rgba(89, 218, 255, 0.30);
 
   animation:
     navbar-phone-pulse
@@ -312,26 +402,40 @@
 
 .navbar__phone-ring svg {
   width: 15px;
+
   height: 15px;
 }
 
 
 @keyframes navbar-phone-pulse {
+
   0% {
-    transform: scale(0.85);
+    transform:
+      scale(0.85);
+
     opacity: 0.8;
   }
 
   70% {
-    transform: scale(1.35);
+    transform:
+      scale(1.35);
+
     opacity: 0;
   }
 
   100% {
+    transform:
+      scale(1.35);
+
     opacity: 0;
   }
+
 }
 
+
+/* =========================================================
+   CTA
+========================================================= */
 
 .navbar__cta {
   position: relative;
@@ -348,13 +452,14 @@
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 11px;
 
   font-size: 0.9rem;
 
-  font-weight: 700;
+  font-weight: 750;
 
   transition:
     transform 0.25s ease,
@@ -363,7 +468,8 @@
 
 
 .navbar__cta:hover {
-  transform: translateY(-2px);
+  transform:
+    translateY(-2px);
 
   box-shadow:
     0 10px 25px
@@ -377,20 +483,23 @@
   position: absolute;
 
   top: 0;
+
   left: -80%;
 
   width: 45%;
+
   height: 100%;
 
   background:
     linear-gradient(
       110deg,
       transparent,
-      rgba(255,255,255,0.55),
+      rgba(255, 255, 255, 0.55),
       transparent
     );
 
-  transform: skewX(-20deg);
+  transform:
+    skewX(-20deg);
 
   transition:
     left 0.6s ease;
@@ -402,22 +511,31 @@
 }
 
 
+/* =========================================================
+   MOBILE BUTTON
+========================================================= */
+
 .navbar__toggle {
   display: none;
 
-  width: 38px;
-  height: 38px;
+  width: 40px;
+
+  height: 40px;
 
   padding: 7px;
 
   flex-direction: column;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 5px;
 
-  background: transparent;
+  flex-shrink: 0;
+
+  background:
+    transparent;
 
   border: 0;
 
@@ -426,7 +544,8 @@
 
 
 .navbar__toggle span {
-  width: 23px;
+  width: 24px;
+
   height: 2px;
 
   border-radius: 3px;
@@ -461,18 +580,247 @@ span:nth-child(3) {
 }
 
 
+/* =========================================================
+   MOVING TICKER
+========================================================= */
+
+.navbar__ticker {
+  position: relative;
+
+  width: 100%;
+
+  height: 38px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  background:
+    linear-gradient(
+      90deg,
+      #eefaff 0%,
+      #ffffff 50%,
+      #eefaff 100%
+    );
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-bottom:
+    1px solid
+    rgba(16, 38, 75, 0.10);
+
+  box-shadow:
+    0 4px 12px
+    rgba(16, 38, 75, 0.07);
+}
+
+
+/* =========================================================
+   TICKER EDGE FADE
+========================================================= */
+
+.navbar__ticker::before,
+.navbar__ticker::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+
+  bottom: 0;
+
+  width: 70px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+
+.navbar__ticker::before {
+  left: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #eefaff 0%,
+      rgba(238, 250, 255, 0) 100%
+    );
+}
+
+
+.navbar__ticker::after {
+  right: 0;
+
+  background:
+    linear-gradient(
+      270deg,
+      #eefaff 0%,
+      rgba(238, 250, 255, 0) 100%
+    );
+}
+
+
+/* =========================================================
+   TICKER TRACK
+========================================================= */
+
+.navbar__ticker-track {
+  display: flex;
+
+  width: max-content;
+
+  flex-shrink: 0;
+
+  will-change: transform;
+
+  animation:
+    navbar-ticker-scroll
+    30s
+    linear
+    infinite;
+}
+
+
+/* =========================================================
+   TICKER CONTENT
+========================================================= */
+
+.navbar__ticker-content {
+  display: flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+
+  white-space: nowrap;
+
+  gap: 18px;
+
+  padding-right: 18px;
+}
+
+
+/* =========================================================
+   TICKER ITEM
+========================================================= */
+
+.ticker__item {
+  color: #40536b;
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   VERIFIED
+========================================================= */
+
+.ticker__highlight {
+  color: #0786ad;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   DOT
+========================================================= */
+
+.ticker__dot {
+  color: #91a4b8;
+
+  font-size: 0.82rem;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   INSURANCE
+========================================================= */
+
+.ticker__insurance {
+  color: #087044;
+
+  font-size: 0.76rem;
+
+  font-weight: 800;
+
+  padding:
+    4px 11px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(23, 160, 100, 0.09);
+
+  border:
+    1px solid
+    rgba(23, 160, 100, 0.12);
+}
+
+
+/* =========================================================
+   AUTO MOVEMENT
+========================================================= */
+
+@keyframes navbar-ticker-scroll {
+
+  from {
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      );
+  }
+
+  to {
+    transform:
+      translate3d(
+        -50%,
+        0,
+        0
+      );
+  }
+
+}
+
+
+/* Pause on hover */
+
+.navbar__ticker:hover
+.navbar__ticker-track {
+  animation-play-state:
+    paused;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
 @media (max-width: 1100px) {
 
   .navbar__links {
-    gap: 24px;
-  }
-
-  .navbar__menu {
     gap: 22px;
   }
 
+  .navbar__menu {
+    gap: 20px;
+  }
+
   .navbar__actions {
-    gap: 14px;
+    gap: 13px;
   }
 
   .navbar__phone {
@@ -480,34 +828,79 @@ span:nth-child(3) {
   }
 
   .navbar__cta {
-    min-width: 128px;
+    min-width: 125px;
+
     padding:
-      10px 16px;
+      10px 15px;
   }
 
 }
 
 
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 900px) {
 
   .navbar__inner {
-    min-height: 68px;
+    min-height: 70px;
+
+    gap: 12px;
   }
 
+
+  /* LOGO */
+
   .navbar__logo {
-    height: 46px;
+    height: 54px;
+
+    max-width: 120px;
   }
+
+
+  /* NAME VISIBLE */
+
+  .navbar__wordmark {
+    display: inline-block;
+
+    font-size: 0.88rem;
+
+    line-height: 1.05;
+  }
+
+
+  .navbar__brand {
+    gap: 8px;
+  }
+
+
+  /* MOBILE BUTTON */
 
   .navbar__toggle {
     display: flex;
   }
 
+
+  /* =====================================================
+     MOBILE NAV MENU
+
+     IMPORTANT:
+     Navbar = 70px
+     Ticker = 36px
+     Total = 106px
+
+     So menu starts BELOW ticker.
+  ====================================================== */
+
   .navbar__links {
+
     position: absolute;
 
-    top: 68px;
+    top: 106px;
 
     left: 0;
+
     right: 0;
 
     display: none;
@@ -522,14 +915,19 @@ span:nth-child(3) {
       12px 22px 22px;
 
     background:
-      rgba(7, 18, 48, 0.98);
+      rgba(10, 31, 65, 0.98);
 
-    backdrop-filter: blur(16px);
+    backdrop-filter:
+      blur(18px);
+
+    -webkit-backdrop-filter:
+      blur(18px);
 
     box-shadow:
       0 18px 35px
-      rgba(0, 0, 0, 0.2);
+      rgba(0, 0, 0, 0.20);
   }
+
 
   .navbar__links--open {
     display: flex;
@@ -539,16 +937,21 @@ span:nth-child(3) {
       0.3s ease both;
   }
 
+
   @keyframes navbar-menu-in {
 
     from {
       opacity: 0;
-      transform: translateY(-8px);
+
+      transform:
+        translateY(-8px);
     }
 
     to {
       opacity: 1;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
   }
@@ -577,11 +980,12 @@ span:nth-child(3) {
 
     animation:
       navbar-link-in
-      0.3s ease
-      both;
+      0.3s ease both;
 
     animation-delay:
-      calc(var(--i, 0) * 0.05s);
+      calc(
+        var(--i, 0) * 0.05s
+      );
   }
 
 
@@ -594,16 +998,22 @@ span:nth-child(3) {
 
     from {
       opacity: 0;
-      transform: translateX(-10px);
+
+      transform:
+        translateX(-10px);
     }
 
     to {
       opacity: 1;
-      transform: translateX(0);
+
+      transform:
+        translateX(0);
     }
 
   }
 
+
+  /* MOBILE ACTIONS */
 
   .navbar__actions {
     width: 100%;
@@ -634,18 +1044,186 @@ span:nth-child(3) {
     min-height: 48px;
   }
 
+
+  /* MOBILE TICKER */
+
+  .navbar__ticker {
+    height: 36px;
+  }
+
+
+  .navbar__ticker-track {
+    animation-duration:
+      23s;
+  }
+
+
+  .navbar__ticker-content {
+    gap: 14px;
+  }
+
+
+  .ticker__item {
+    font-size:
+      0.70rem;
+  }
+
+
+  .ticker__insurance {
+    font-size:
+      0.69rem;
+
+    padding:
+      4px 9px;
+  }
+
+
+  .ticker__dot {
+    font-size:
+      0.72rem;
+  }
+
 }
 
 
-@media (max-width: 450px) {
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-  .navbar__wordmark {
-    display: none;
-  }
+@media (max-width: 520px) {
 
   .navbar__inner {
-    padding-left: 18px;
-    padding-right: 18px;
+    min-height: 68px;
+
+    padding-left:
+      14px;
+
+    padding-right:
+      14px;
+
+    gap: 8px;
+  }
+
+
+  .navbar__logo {
+    height: 50px;
+
+    max-width: 105px;
+  }
+
+
+  /* HELLO PACKERS ALWAYS VISIBLE */
+
+  .navbar__wordmark {
+    display: inline-block;
+
+    font-size:
+      0.78rem;
+
+    line-height:
+      1.05;
+  }
+
+
+  .navbar__brand {
+    gap: 7px;
+  }
+
+
+  .navbar__toggle {
+    width: 38px;
+
+    height: 38px;
+  }
+
+
+  /* 68px navbar + 36px ticker */
+
+  .navbar__links {
+    top: 104px;
+  }
+
+
+  .navbar__ticker::before,
+  .navbar__ticker::after {
+    width: 32px;
+  }
+
+
+  .navbar__ticker-track {
+    animation-duration:
+      18s;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .navbar__inner {
+
+    padding-left:
+      10px;
+
+    padding-right:
+      10px;
+  }
+
+
+  .navbar__logo {
+
+    height: 46px;
+
+    max-width: 92px;
+  }
+
+
+  .navbar__wordmark {
+
+    font-size:
+      0.70rem;
+  }
+
+
+  .navbar__brand {
+
+    gap: 5px;
+  }
+
+
+  .navbar__toggle {
+
+    width: 36px;
+
+    height: 36px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navbar__ticker-track {
+    animation: none;
+  }
+
+  .navbar__phone-ring::before {
+    animation: none;
+  }
+
+  .navbar__logo,
+  .navbar__link,
+  .navbar__phone,
+  .navbar__cta {
+    transition: none;
   }
 
 }
