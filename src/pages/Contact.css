@@ -963,6 +963,29 @@
 
 
 /* =========================================================
+   WHATSAPP
+========================================================= */
+
+.contact-info-icon--whatsapp {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.contact-whatsapp-btn {
+  text-decoration: none;
+}
+
+.contact-action-card__buttons .contact-whatsapp-btn {
+  border-color: rgba(41, 197, 246, 0.35);
+}
+
+.contact-action-card__buttons .contact-whatsapp-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
    WHY US
 ========================================================= */
 

@@ -30,6 +30,10 @@ import rkLogo from '../assets/network/rk.png';
 import shiftingHubLogo from '../assets/network/shifting hub.png';
 import wellpackLogo from '../assets/network/wellpack.png';
 import eagleInternationalLogo from '../assets/network/eagle.png';
+import goodtimeLogo from '../assets/network/goodtime.png';
+import atsLogo from '../assets/network/ats.png';
+import balajiLogo from '../assets/network/balaji.png';
+import pragatiLogo from '../assets/network/pragati.png';
 
 import './Home.css';
 
@@ -308,6 +312,135 @@ const NETWORK_PARTNERS = [
   ],
 },
 
+
+  {
+    id: 'goodtime',
+
+    name: 'GoodTime Packers & Movers',
+
+    logo: goodtimeLogo,
+
+    phone: '7666099397',
+
+    phoneAlt: '8446904459',
+
+    email:
+      'goodtimepackersandmovers@gmail.com',
+
+    website:
+      'goodtimepackersandmovers.com',
+
+    location:
+      'Mumbai, Maharashtra',
+
+    description:
+      'Packing, loading, transportation and household or office shifting support across India.',
+
+    services: [
+      'Loading & Unloading',
+      'Transportation',
+      'Household Goods',
+      'Office Shifting',
+    ],
+  },
+
+
+  {
+    id: 'ats',
+
+    name: 'ATS Packers & Movers',
+
+    logo: atsLogo,
+
+    phone: '9819338363',
+
+    phoneAlt: '9821748980',
+
+    email:
+      'atspackers@gmail.com',
+
+    website:
+      'atspackers.com',
+
+    location:
+      'Kandivali East, Mumbai',
+
+    description:
+      'Local, domestic and international packing, moving, loading, unloading and transportation services.',
+
+    services: [
+      'Packing & Moving',
+      'Loading & Unloading',
+      'Transportation',
+      'International Moving',
+    ],
+  },
+
+
+  {
+    id: 'balaji-national',
+
+    name: 'Balaji National Packers And Movers',
+
+    logo: balajiLogo,
+
+    phone: '',
+
+    phoneAlt: '',
+
+    email:
+      'info@balajinationalpackers.com',
+
+    website:
+      'balajinationalpackers.com',
+
+    location:
+      'Kapurbawadi, Thane West',
+
+    description:
+      'Home relocation, storage, office shifting, car transportation, packing, unpacking, loading and unloading.',
+
+    services: [
+      'Home Relocation',
+      'Storage',
+      'Office Shifting',
+      'Car Transportation',
+      'Packing & Unpacking',
+    ],
+  },
+
+
+  {
+    id: 'pragati',
+
+    name: 'Pragati Home Packers & Movers',
+
+    logo: pragatiLogo,
+
+    phone: '8693060523',
+
+    phoneAlt: '8828782812',
+
+    email:
+      'paragatipackers1917@gmail.com',
+
+    website:
+      'pragatihomepackersandmovers.com',
+
+    location:
+      'Andheri East & Malad East, Mumbai',
+
+    description:
+      'Local, domestic and international shifting solutions with professional packing and moving support.',
+
+    services: [
+      'Local Shifting',
+      'Domestic Shifting',
+      'International Shifting',
+      'Packing & Moving',
+    ],
+  },
+
 ];
 
 
@@ -568,7 +701,7 @@ export default function Home() {
 
 
   return (
-    <>
+    <div className="home">
 
       {/* =====================================================
           HERO
@@ -1318,6 +1451,6 @@ export default function Home() {
 
       )}
 
-    </>
+    </div>
   );
 }

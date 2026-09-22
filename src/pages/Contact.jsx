@@ -35,6 +35,18 @@ const INITIAL_FORM = {
   date: '',
 };
 
+/*
+ * Google Ads / Google tag event helper.
+ * The site-wide Google tag (AW-18446601664) must be installed in index.html.
+ * Conversion-specific send_to labels should be added from Google Ads after
+ * the conversion actions are created; do not invent a conversion label here.
+ */
+const trackGoogleEvent = (eventName, params = {}) => {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', eventName, params);
+  }
+};
+
 const WHY_US = [
   {
     icon: <IconUsers />,
@@ -78,6 +90,20 @@ export default function Contact() {
     if (error) {
       setError('');
     }
+  };
+
+  const whatsappNumber = String(CONTACT.phone || '').replace(/[^0-9]/g, '');
+
+  const handleWhatsAppClick = () => {
+    trackGoogleEvent('whatsapp_click', {
+      link_location: 'contact_page',
+    });
+  };
+
+  const handlePhoneClick = () => {
+    trackGoogleEvent('phone_click', {
+      link_location: 'contact_page',
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -144,6 +170,13 @@ export default function Contact() {
             'Unable to send your request right now.'
         );
       }
+
+      // Track the successful website enquiry as a Google tag event.
+      // Google Ads can later use the corresponding conversion action/label.
+      trackGoogleEvent('generate_lead', {
+        form_name: 'hello_packers_contact_quote',
+        lead_source: 'website_contact_page',
+      });
 
       setSent(true);
       setForm(INITIAL_FORM);
@@ -220,6 +253,8 @@ export default function Contact() {
 
           {/* =================================================
               CONTACT FORM
+              Google Ads tracking:
+              successful submissions fire the generate_lead event.
           ================================================= */}
 
           <Reveal
@@ -507,6 +542,7 @@ export default function Contact() {
 
                     <a
                       href={`tel:${CONTACT.phone}`}
+                      onClick={handlePhoneClick}
                     >
                       {CONTACT.phoneDisplay}
                     </a>
@@ -525,6 +561,25 @@ export default function Contact() {
                       href={`mailto:${CONTACT.email}`}
                     >
                       {CONTACT.email}
+                    </a>
+                  </div>
+                </li>
+
+                <li>
+                  <span className="contact-info-icon contact-info-icon--whatsapp">
+                    <span aria-hidden="true">WA</span>
+                  </span>
+
+                  <div>
+                    <h4>WhatsApp</h4>
+
+                    <a
+                      href={`https://wa.me/${whatsappNumber}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleWhatsAppClick}
+                    >
+                      Chat with us instantly
                     </a>
                   </div>
                 </li>
@@ -601,10 +656,22 @@ export default function Contact() {
                 <div className="contact-action-card__buttons">
                   <a
                     href={`tel:${CONTACT.phone}`}
+                    onClick={handlePhoneClick}
                     className="btn btn-primary"
                   >
                     <IconPhone />
                     Call Now
+                  </a>
+
+                  <a
+                    href={`https://wa.me/${whatsappNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleWhatsAppClick}
+                    className="btn btn-outline contact-whatsapp-btn"
+                    aria-label="Chat with Hello Packers on WhatsApp"
+                  >
+                    WhatsApp
                   </a>
 
                   <a
